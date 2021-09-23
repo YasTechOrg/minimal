@@ -1,0 +1,13 @@
+package org.yastech.minimal
+
+import org.springframework.boot.builder.SpringApplicationBuilder
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
+
+class ServletInitializer : SpringBootServletInitializer()
+{
+    override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder
+    {
+        return application.sources(MinimalApplication::class.java)
+    }
+
+}
