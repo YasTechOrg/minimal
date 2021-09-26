@@ -5,6 +5,7 @@ import Shops from "@/views/surface/Shops.vue"
 import About from "@/views/surface/About.vue"
 import Contact from "@/views/surface/Contact.vue"
 import Login from "@/views/account/Login.vue"
+import Register from "@/views/account/Register.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account/login',
     name: 'Login',
     component: Login,
+    meta: { layout: "account" },
+  },
+  {
+    path: '/account/register',
+    name: 'Register',
+    component: Register,
     meta: { layout: "account" },
   }
 ]

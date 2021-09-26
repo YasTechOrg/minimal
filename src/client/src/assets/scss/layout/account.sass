@@ -1,0 +1,85 @@
+@import ../public/fonts
+@import ../public/colors
+
+main[data-account]
+  background-color: white
+  height: 100%
+  width: 100%
+  position: absolute
+  top: 0
+  left: 0
+
+  form
+    padding: 10px
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 100%
+    max-width: 400px
+    min-width: 0
+
+    img
+      height: 60px
+      width: fit-content
+
+    p.title
+      font-size: 30px
+      color: #000
+      font-family: roboto, serif
+      margin-top: 20px
+      text-transform: uppercase
+      letter-spacing: 10px
+      text-align: center
+
+    .inputs
+      margin-top: 30px
+
+      input
+        margin-top: 10px
+        background-color: transparent!important
+        padding: 16px
+        border: 1px solid $accent_gray4
+        border-radius: 5px!important
+        color: black!important
+        font-size: 15px
+        width: 100%
+        text-align: center
+        font-family: ubuntu, serif
+
+      input:focus, input:hover
+        outline: unset!important
+
+    button
+      margin-top: 20px
+      border-radius: 5px
+      background-color: #0083e2
+      box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.25)
+      border: none
+      width: 100%
+      color: #fff
+      font-size: 18px
+      letter-spacing: 3px
+      padding: 14px
+      text-transform: uppercase
+
+    button:hover
+      box-shadow: unset
+
+    p.dn
+      margin-top: 30px
+      color: $accent_gray2
+      font-size: 18px
+      font-family: ubuntu, serif
+
+      a:hover
+        color: $accent_blue
+
+    p.fp
+      margin-top: 10px
+      color: $accent_gray2
+      font-size: 18px
+      font-family: ubuntu, serif
+
+    p.fp:hover
+      color: $accent_blue
