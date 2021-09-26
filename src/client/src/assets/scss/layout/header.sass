@@ -1,0 +1,72 @@
+@import ../public/colors
+@import ../public/fonts
+
+header[data-main]
+  background-color: white
+  padding: 24px 12px
+
+  .inner.desktop
+    max-width: 1440px!important
+    width: 100%!important
+
+    .left
+
+      img
+        height: 30px
+
+      .navigation
+
+        a
+          text-decoration: none
+          color: $accent_gray1
+          font-family: roboto, serif
+          margin-left: 30px
+          font-size: 18px
+
+        a:hover, a.selected
+          color: black
+
+    .right
+
+      button
+        font-size: 20px
+        font-family: Ubuntu, serif
+        padding: 8px 30px
+        text-transform: uppercase
+        color: white
+        background-color: $accent_green
+        border-radius: 8px
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.15)
+        border: none
+
+      button:hover
+        box-shadow: unset
+
+  .inner.mobile
+
+    .logo
+
+      img
+        height: 30px
+
+    .right
+
+      button
+        padding: 12px
+        background-color: $accent_green
+        border-radius: 8px
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.15)
+        border: none
+
+      button:hover
+        box-shadow: unset
+
+@media screen and (max-width: 850px)
+
+  header[data-main]
+
+    .inner.mobile
+      display: flex!important
+
+    .inner.desktop
+      display: none!important
