@@ -1,4 +1,4 @@
-package org.yastech.weeki.security
+package org.yastech.minimal.security
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
