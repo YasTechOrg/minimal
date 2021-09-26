@@ -1,9 +1,14 @@
 <!--suppress ALL -->
 <template lang="pug">
 
-form#register.d-flex.justify-content-center.align-items-center.flex-column
+form#register.d-flex.justify-content-center.align-items-center.flex-column(
+    method="POST"
+    action="/api/controller/account/register"
+  )
 
   img( src="../../assets/img/brand/logo.png" alt="Minimal" )
+
+  input( :value="require('@/csrfManager').getToken()" name="_csrf" hidden )
 
   p.mb-0.title Register
 
@@ -19,7 +24,7 @@ form#register.d-flex.justify-content-center.align-items-center.flex-column
 
     input( type="password" dir="auto" placeholder="repet password" )
 
-  button( type="button" ) Register
+  button( type="submit" ) Register
 
   p.mb-0.dn Have an account? #[a.cursor-pointer( @click="$router.push('/account/login')" ) Login]
 
@@ -30,6 +35,18 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
 
+  // On Page Load
+  mounted()
+  {
+
+    // Get Page Response
+    let res = this.$route.query.res
+
+    if (res === "exi")
+    {
+      //toast.error("System: This account is not exist!")
+    }
+  }
 })
 
 export default class Register extends Vue {}
