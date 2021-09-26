@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class UrlHandler
 {
-    @RequestMapping(value = ["/{path:[^.]*}"])
+    @RequestMapping(value = ["/{path:[^.]*}", "/account/{path:[^.]*}"])
     fun surface(@PathVariable path: String): String
     {
         return "forward:/"
