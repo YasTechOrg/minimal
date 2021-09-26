@@ -1,7 +1,7 @@
 <template lang="pug">
 
 #about
-  h1 hi
+  h1 About
 
 </template>
 
