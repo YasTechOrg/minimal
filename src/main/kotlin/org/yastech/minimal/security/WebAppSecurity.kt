@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 import org.yastech.minimal.data.PasswordEncoder
 import org.yastech.minimal.services.UserDetailService
 
@@ -34,11 +35,10 @@ class WebAppSecurity
     {
         http
             // CSRF CONFIG
-            //.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            .csrf().disable()
+            .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 
             // ONLY SAME ORIGINS HEADER
-            .headers().frameOptions().sameOrigin().and()
+            .and().headers().frameOptions().sameOrigin().and()
 
             // SET COOKIE SAME SITE POLICY
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
