@@ -113,6 +113,6 @@ import { Options, Vue } from 'vue-class-component'
 export default class LayoutManager extends Vue {}
 </script>
 
-<style src="../assets/scss/layout/header.sass" lang="sass"/>
-<style src="../assets/scss/layout/account.sass" lang="sass"/>
-<style src="../assets/scss/layout/surface.sass" lang="sass"/>
+<style src="../assets/sass/layout/header.sass" lang="sass"/>
+<style src="../assets/sass/layout/account.sass" lang="sass"/>
+<style src="../assets/sass/layout/surface.sass" lang="sass"/>

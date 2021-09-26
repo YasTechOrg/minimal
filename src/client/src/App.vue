@@ -18,4 +18,4 @@ import LayoutManager from "@/components/LayoutManager.vue"
 export default class App extends Vue {}
 </script>
 
-<style src="./assets/scss/public/style.sass" lang="sass"/>
+<style src="./assets/sass/public/style.sass" lang="sass"/>
