@@ -47,7 +47,11 @@
         button.d-flex.justify-content-center.align-items-center( @click="$router.push('/account/login')" )
           img( src="../assets/img/images/login_white.png" alt="login" )
 
-  slot
+  main( v-if="pageLayout === 'surface'" data-surface )
+    slot
+
+  main( v-if="pageLayout === 'account'" data-account )
+    slot
 
 </template>
 
