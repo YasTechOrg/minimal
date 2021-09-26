@@ -11,7 +11,9 @@ class UserDetail
     private var password: String,
     private var firstname: String?,
     private var lastname: String?,
-    private var authorities:  MutableCollection<out GrantedAuthority>
+    private var authorities:  MutableCollection<out GrantedAuthority>,
+    private var forgot: Boolean? = false,
+    private var forgotCode: String?,
 ) : UserDetails
 {
     fun build(user: User): UserDetail
@@ -21,7 +23,9 @@ class UserDetail
             user.password,
             user.firstname,
             user.lastname,
-            mutableListOf(SimpleGrantedAuthority(user.role.name)),
+            mutableListOf(SimpleGrantedAuthority(user.role!!.name)),
+            user.forgot,
+            user.forgotCode
         )
     }
 
