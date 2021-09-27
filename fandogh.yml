@@ -1,0 +1,10 @@
+kind: ExternalService
+name: minimal
+spec:
+  image_pull_policy: Always
+  port: 80
+  source:
+    context: .
+    jar_name: minimal.jar
+    jdk_version: '11'
+    project_type: spring_boot

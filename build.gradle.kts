@@ -52,6 +52,10 @@ tasks.bootWar {
     archiveFileName.set("minimal.war")
 }
 
+tasks.bootJar {
+    archiveFileName.set("minimal.jar")
+}
+
 tasks.register<Copy>("copyFrontendToBuild")
 {
     dependsOn("npmBuild")
