@@ -50,6 +50,9 @@ main[data-account]
       input:focus, input:hover
         outline: unset!important
 
+      input.err
+        border-color: red!important
+
     button
       margin-top: 20px
       border-radius: 5px
@@ -63,8 +66,12 @@ main[data-account]
       padding: 14px
       text-transform: uppercase
 
-    button:hover
+    button:enabled:hover
       box-shadow: unset
+
+    button:disabled
+      box-shadow: unset!important
+      background-color: #67696a!important
 
     .alert
       margin-top: 20px!important

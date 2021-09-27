@@ -76,7 +76,7 @@ import { Options, Vue } from 'vue-class-component'
         {
 
           // Set Title
-          document.title = to.meta.title || `${this.$route.name} | Minimal`
+          document.title = to.meta.title || `${this.$route.name} . Minimal`
 
           // Load Page
           this.load()

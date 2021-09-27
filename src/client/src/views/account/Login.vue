@@ -14,9 +14,9 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
 
   .inputs
 
-    input( type="text" dir="auto" placeholder="email" name="email" )
+    input( type="text" dir="auto" placeholder="email" name="email" required )
 
-    input( type="password" dir="auto" placeholder="password" name="password" )
+    input( type="password" dir="auto" placeholder="password" name="password" required )
 
   button( type="submit" ) Login
 
