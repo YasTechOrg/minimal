@@ -20,6 +20,18 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
 
   button( type="submit" ) Login
 
+  .al1.alert.alert-danger.w-100( role="alert" v-if="res === 'err'" )
+    | Username or Password is incorrect!
+
+  .al2.alert.alert-warning.w-100( role="alert" v-if="res === 'safe'" )
+    | Sorry, this account has been secured! Please change your password to continue.
+
+  .al3.alert.alert-danger.w-100( role="alert" v-if="res === 'acp'" )
+    | This account has not been verified!
+
+  .al4.alert.alert-success.w-100( role="alert" v-if="res === 'd_reg'" )
+    | Your account has been created, please verify your account via the email sent to you.
+
   p.mb-0.dn Don't have an account? #[a.cursor-pointer( @click="$router.push('/account/register')" ) Register]
 
   p.mb-0.fp.cursor-pointer Forgot your password?
@@ -31,33 +43,13 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
 
-  // On Page Load
-  mounted()
+  // Page Variables
+  data()
   {
-
-    // Get Page Response
-    let res = this.$route.query.res
-
-    if (res === "err")
-    {
-      //toast.error("System: User is not exists!", defaultToastSetting)
+    return {
+      res: this.$route.query.res
     }
-
-    if (res === "safe")
-    {
-      //toast.warning("System : Sorry, this account has been secured! Please change your password to continue.", defaultToastSetting)
-    }
-
-    if (res === "acp")
-    {
-      //toast.warning("System : This account has not been verified!", defaultToastSetting)
-    }
-
-    if (res === "d_reg")
-    {
-      //toast.success("System : Your account has been created, please verify your account via the email sent to you.", defaultToastSetting)
-    }
-  }
+  },
 })
 
 export default class Login extends Vue {}

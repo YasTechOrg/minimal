@@ -26,6 +26,8 @@ form#register.d-flex.justify-content-center.align-items-center.flex-column(
 
   button( type="submit" ) Register
 
+  .al1.alert.alert-danger.w-100( role="alert" v-if="res === 'exi'" ) This account is exist!
+
   p.mb-0.dn Have an account? #[a.cursor-pointer( @click="$router.push('/account/login')" ) Login]
 
 </template>
@@ -35,18 +37,13 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
 
-  // On Page Load
-  mounted()
+  // Page Variables
+  data()
   {
-
-    // Get Page Response
-    let res = this.$route.query.res
-
-    if (res === "exi")
-    {
-      //toast.error("System: This account is not exist!")
+    return {
+      res: this.$route.query.res
     }
-  }
+  },
 })
 
 export default class Register extends Vue {}
