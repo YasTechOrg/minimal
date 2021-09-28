@@ -23,7 +23,8 @@ class UserDetailService
             user.lastname,
             mutableListOf(SimpleGrantedAuthority(user.role!!.name)),
             user.forgot,
-            user.forgotCode
+            user.forgotCode,
+            user.confirmCode
         )
     }
 }
