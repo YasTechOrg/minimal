@@ -50,7 +50,7 @@ class WebAppSecurity
             .and().authorizeRequests()
 
             // ACCESS TO CLIENT URLS
-            .antMatchers("/*", "/account/*").permitAll()
+            .antMatchers("/*", "/account/*", "/dashboard/*").permitAll()
 
             // ACCESS TO CLIENT RESOURCES
             .antMatchers("/css/*", "/img/*", "/js/*").permitAll()
