@@ -29,8 +29,14 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
   .al3.alert.alert-danger.w-100( role="alert" v-if="res === 'acp'" )
     | This account has not been verified!
 
-  .al4.alert.alert-success.w-100( role="alert" v-if="res === 'd_reg'" )
+  .al4.alert.alert-danger.w-100( role="alert" v-if="res === 'c_err'" )
+    | Verify code is incorrect!
+
+  .al5.alert.alert-success.w-100( role="alert" v-if="res === 'd_reg'" )
     | Your account has been created, please verify your account via the email sent to you.
+
+  .al6.alert.alert-success.w-100( role="alert" v-if="res === 'c_done'" )
+    | Your account has been verified! please login.
 
   p.mb-0.dn Don't have an account? #[a.cursor-pointer( @click="$router.push('/account/register')" ) Register]
 
