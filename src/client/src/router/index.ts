@@ -6,6 +6,7 @@ import About from "@/views/surface/About.vue"
 import Contact from "@/views/surface/Contact.vue"
 import Login from "@/views/account/Login.vue"
 import Register from "@/views/account/Register.vue"
+import Dashboard from "@/views/dashboard/Dashboard.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -49,6 +50,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Register',
     component: Register,
     meta: { layout: "account" },
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: { layout: "dashboard" },
   }
 ]
 

@@ -53,6 +53,9 @@
   main( v-if="pageLayout === 'account'" data-account )
     slot
 
+  main( v-if="pageLayout === 'dashboard'" data-dashboard )
+    slot
+
 </template>
 
 <script lang="ts">
@@ -76,7 +79,7 @@ import { Options, Vue } from 'vue-class-component'
         {
 
           // Set Title
-          document.title = to.meta.title || `${this.$route.name} . Minimal`
+          document.title = to.meta.title || `${this.$route.name} | Minimal`
 
           // Load Page
           this.load()
