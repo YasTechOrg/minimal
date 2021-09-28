@@ -1,0 +1,71 @@
+@import ../public/fonts
+@import ../public/colors
+
+.productContainer
+  background-color: white
+  border-radius: 15px
+  text-align: center
+  max-width: 1440px
+  margin: auto
+
+.sectionsTitle
+  font-family: ubuntu, serif
+  font-size: 40px
+  color: $accent_gray3
+
+#home
+  background-color: whitesmoke
+  padding: 85px 60px
+
+
+  .inSalesProducts
+    @extend .productContainer
+
+    .input-group
+      padding: 25px 25px
+      border-radius: 15px
+      box-shadow: 0 0 8px 2px rgba(104, 104, 104, 0.27)
+      top: -35px
+      background-color: white
+
+      img
+        background-color: white
+        border: none
+        width: 45px
+
+      input
+        padding: 0
+        border: none
+        box-shadow: none
+        font-size: 18px
+        font-family: roboto, serif
+
+    p
+      @extend .sectionsTitle
+
+
+@media screen and (max-width: 850px)
+  #home
+    padding: 55px 30px
+
+  .searchInput
+    width: 80% !important
+
+
+@media screen and (max-width: 576px)
+  .sectionsTitle
+    font-size: 25px !important
+
+  #home
+    padding: 55px 0
+
+  .searchInput
+    width: 90% !important
+    padding: 18px 14px !important
+    top: -25px
+
+    input
+      display: none
+
+    input.d-none
+      display: inline !important

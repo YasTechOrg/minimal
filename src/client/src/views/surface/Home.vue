@@ -1,16 +1,23 @@
+<!--suppress ALL -->
 <template lang="pug">
 
 #home
-  h1 hi
+  .inSalesProducts
+    .input-group.searchInput.w-50.me-auto.ms-auto.d-flex.justify-content-between.position-relative
+      input.form-control( placeholder="Search everything you want....")
+      input.form-control.d-none( placeholder="Search...")
+      img.input-group-text( src="../../assets/img/images/search.png" alt="Search Icon" )
+    p IN SALES PRODUCTS
 
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import {Options, Vue} from 'vue-class-component'
 
-@Options({
+@Options({})
 
-})
-
-export default class Home extends Vue {}
+export default class Home extends Vue {
+}
 </script>
+
+<style src="../../assets/sass/layout/home.sass" lang="sass"/>
