@@ -20,4 +20,4 @@ export default class Home extends Vue {
 }
 </script>
 
-<style src="../../assets/sass/layout/home.sass" lang="sass"/>
+<style src="../../assets/sass/page/home.sass" lang="sass"/>
