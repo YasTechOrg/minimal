@@ -7,7 +7,7 @@
 
 .layoutManager
 
-  header.d-flex.align-items-center.justify-content-center( v-if="pageLayout === 'surface'" data-main )
+  header.d-flex.align-items-center.justify-content-center( v-if="pageLayout === 'surface' || pageLayout === 'dashboard'" data-main )
 
     .inner.d-flex.align-items-center.justify-content-between.desktop
 
@@ -30,7 +30,27 @@
 
       .right
 
-        button( @click="$router.push('/account/login')" ) Login
+        button( @click="$router.push('/account/login')" v-if="!cAtuh" ) Login
+
+        .user.cursor-pointer.position-relative( v-else )
+          p.mb-0( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
+          .dd.d-none
+
+            .d-flex( @click="$router.push('/dashboard')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 dashboard
+              p.mb-0 Dashboard
+
+            .d-flex( @click="$router.push('/dashboard/profile')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 account_circle
+              p.mb-0 Profile
+
+            .d-flex( @click="$router.push('/dashboard/cart')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 shopping_cart
+              p.mb-0 Cart
+
+            .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 logout
+              p.mb-0 Logout
 
     .inner.d-flex.justify-content-between.w-100.align-items-center.mobile.d-none
 
@@ -44,8 +64,31 @@
 
       .right.d-flex.justify-content-end.align-items-center
 
-        button.d-flex.justify-content-center.align-items-center( @click="$router.push('/account/login')" )
+        button.d-flex.justify-content-center.align-items-center( @click="$router.push('/account/login')" v-if="!cAtuh" )
           img( src="../assets/img/images/login_white.png" alt="login" )
+
+        .user.position-relative( v-else )
+
+          p.mb-0( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
+
+          .dd.d-none
+
+            .d-flex( @click="$router.push('/dashboard')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 dashboard
+              p.mb-0 Dashboard
+
+            .d-flex( @click="$router.push('/dashboard/profile')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 account_circle
+              p.mb-0 Profile
+
+            .d-flex( @click="$router.push('/dashboard/cart')" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 shopping_cart
+              p.mb-0 Cart
+
+            .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
+              span.material-icons-outlined.md-24 logout
+              p.mb-0 Logout
+
 
   main( v-if="pageLayout === 'surface'" data-surface )
     slot
@@ -60,8 +103,19 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import { checkAuth, removeAuth, getAuth } from "@/authManager"
+import axios from "axios"
+import { getToken } from "@/csrfManager"
 
 @Options({
+
+  // App Varibales
+  data()
+  {
+    return {
+      userInfo: {}
+    }
+  },
 
   // App Watchers
   watch: {
@@ -94,22 +148,96 @@ import { Options, Vue } from 'vue-class-component'
     // On App Load
     async load()
     {
+      // Show Loading
       document.getElementById("loader-wrapper")!.classList.remove("d-none")
 
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // Check Login
+      if (checkAuth())
+      {
+        const d: any = localStorage.getItem("at_time")
+        const date1: any = new Date(d)
+        const date2: any = new Date()
+        const diffTime = Math.abs(date2 - date1)
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+        // Check if expired
+        if (diffDays >= 5)
+        {
+          removeAuth()
+          if (this.pageLayout === 'dashboard')
+          {
+            this.$router.push("/account/login?res=expi")
+          }
+        }
+
+        // Double Login Check
+        if (this.pageLayout === "account")
+        {
+          this.$router.push("/dashboard")
+        }
+
+        // Get User Info
+        this.userInfo = await new Promise(resolve =>
+        {
+          axios
+            .get("/api/rest/account/user/get", {
+              headers: {
+                "_csrf" : getToken(),
+                "Authorization": getAuth()
+              }
+            })
+            .then(value =>
+            {
+              resolve(value.data)
+
+              localStorage.setItem("userData", JSON.stringify(value.data))
+            })
+            .catch(() =>
+            {
+              removeAuth()
+
+              if (this.pageLayout === 'dashboard')
+              {
+                this.$router.push("/account/login?res=expi")
+              }
+            })
+        })
+      }
+      else
+      {
+        if (this.pageLayout === "dashboard")
+        {
+          this.$router.push("/account/login")
+        }
+      }
+
 
       document.getElementById("loader-wrapper")!.classList.add("d-none")
-    }
+    },
+
+    // Logout
+    logoutUser()
+    {
+      localStorage.removeItem("at")
+      localStorage.removeItem("userData")
+      location.reload()
+    },
   },
 
   // App Computed Variables
   computed: {
 
     // Get Page Layout
-    pageLayout()
+    pageLayout(): string
     {
       return this.$route.meta["layout"]
     },
+
+    // Check Auth
+    cAtuh(): boolean
+    {
+      return checkAuth()
+    }
   }
 })
 
@@ -119,3 +247,4 @@ export default class LayoutManager extends Vue {}
 <style src="../assets/sass/layout/header.sass" lang="sass"/>
 <style src="../assets/sass/layout/account.sass" lang="sass"/>
 <style src="../assets/sass/layout/surface.sass" lang="sass"/>
+<style src="../assets/sass/layout/dashboard.sass" lang="sass"/>
