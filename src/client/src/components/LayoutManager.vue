@@ -96,8 +96,47 @@
   main( v-if="pageLayout === 'account'" data-account )
     slot
 
-  main( v-if="pageLayout === 'dashboard'" data-dashboard )
-    slot
+  main( v-if="pageLayout === 'dashboard'" data-dashboard ).d-flex.justify-content-center
+
+    .inner.d-flex.align-items-start.justify-content-start
+
+      .menu.flex-grow-0
+
+        .inner
+
+          p.mb-0 Menu
+
+          router-link( active-class="ac" to="/dashboard" ).c.d-flex.justify-content-center.align-items-center
+            | Dashboard
+
+          router-link( active-class="ac" to="/dashboard/cart" ).c.d-flex.justify-content-center.align-items-center
+            | Cart
+
+          router-link( active-class="ac" to="/dashboard/payment" ).c.d-flex.justify-content-center.align-items-center
+            | Payment
+
+          router-link( active-class="ac" to="/dashboard/purchase" ).c.d-flex.justify-content-center.align-items-center
+            | Purchase
+
+          router-link( active-class="ac" to="/dashboard/profile" ).c.d-flex.justify-content-center.align-items-center
+            | Profile
+
+          router-link( active-class="ac" to="/dashboard/ticket" ).c.d-flex.justify-content-center.align-items-center
+            | Ticket
+
+          a.c.d.d-flex.justify-content-center.align-items-center.cursor-pointer( @click="logoutUser" )
+            | Logout
+
+
+      .content.flex-grow-1
+
+        .navigation.d-flex.align-items-center.justify-content-start.w-100
+
+          span.material-icons-outlined.md-24 dashboard
+
+          p.mb-0 {{ $route.meta["nav"] }}
+
+        slot
 
 </template>
 
@@ -133,7 +172,7 @@ import { getToken } from "@/csrfManager"
         {
 
           // Set Title
-          document.title = to.meta.title || `${this.$route.name} | Minimal`
+          document.title = to.meta.title || `${ this.$route.name } | Minimal`
 
           // Load Page
           this.load()
