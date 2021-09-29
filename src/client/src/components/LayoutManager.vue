@@ -5,6 +5,27 @@
 
   img( src="../assets/img/animations/loader.gif" alt="loader" )
 
+#mobile_menu.d-none
+
+  .w-100.d-flex.flex-column
+
+    router-link( active-class="ac" to="/" ) Home
+    router-link( active-class="ac" to="/categories" ) Categories
+    router-link( active-class="ac" to="/shops" ) Shops
+    router-link( active-class="ac" to="/about" ) About Us
+    router-link( active-class="ac" to="/contact" ) Contact Us
+
+    .d-flex.flex-column.p-0( v-if="cAtuh" )
+
+      .divir
+
+      router-link( active-class="ac" to="/dashboard" ) Dashboard
+      router-link( active-class="ac" to="/dashboard/cart" ) Cart
+      router-link( active-class="ac" to="/dashboard/payment" ) Payment
+      router-link( active-class="ac" to="/dashboard/purchase" ) Purchase
+      router-link( active-class="ac" to="/dashboard/ticket" ) Ticket
+
+
 .layoutManager
 
   header.d-flex.align-items-center.justify-content-center( v-if="pageLayout === 'surface' || pageLayout === 'dashboard'" data-main )
@@ -56,7 +77,7 @@
 
       .left.d-flex.justify-content-start.align-items-center
 
-        img( src="../assets/img/images/menu.png" alt="menu" )
+        img( src="../assets/img/images/menu.png" alt="menu" @click="toggleMobileMenu" )
 
       .logo.d-flex.justify-content-center.align-items-center
 
@@ -174,6 +195,11 @@ import { getToken } from "@/csrfManager"
           // Set Title
           document.title = to.meta.title || `${ this.$route.name } | Minimal`
 
+          if (!document.getElementById("mobile_menu")!.classList.contains("d-none"))
+          {
+            document.getElementById("mobile_menu")!.classList.add("d-none")
+          }
+
           // Load Page
           this.load()
         }
@@ -261,6 +287,12 @@ import { getToken } from "@/csrfManager"
       localStorage.removeItem("userData")
       location.reload()
     },
+
+    // Toggle Mobile Menu
+    toggleMobileMenu()
+    {
+      document.getElementById("mobile_menu")!.classList.toggle("d-none")
+    }
   },
 
   // App Computed Variables

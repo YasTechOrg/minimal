@@ -66,31 +66,31 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dashboard/cart',
     name: 'Cart',
     component: Cart,
-    meta: { layout: "dashboard", nav: "Dashboard > Cart" },
+    meta: { layout: "dashboard", nav: "Dashboard / Cart" },
   },
   {
     path: '/dashboard/payment',
     name: 'Payment',
     component: Payment,
-    meta: { layout: "dashboard", nav: "Dashboard > Payment" },
+    meta: { layout: "dashboard", nav: "Dashboard / Payment" },
   },
   {
     path: '/dashboard/purchase',
     name: 'Purchase',
     component: Purchase,
-    meta: { layout: "dashboard", nav: "Dashboard > Purchase" },
+    meta: { layout: "dashboard", nav: "Dashboard / Purchase" },
   },
   {
     path: '/dashboard/profile',
     name: 'Profile',
     component: Profile,
-    meta: { layout: "dashboard", nav: "Dashboard > Profile" },
+    meta: { layout: "dashboard", nav: "Dashboard / Profile" },
   },
   {
     path: '/dashboard/ticket',
     name: 'Ticket',
     component: Ticket,
-    meta: { layout: "dashboard", nav: "Dashboard > Ticket" },
+    meta: { layout: "dashboard", nav: "Dashboard / Ticket" },
   }
 ]
 
