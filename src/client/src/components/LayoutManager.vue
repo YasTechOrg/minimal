@@ -90,25 +90,25 @@
 
         .user.position-relative( v-else )
 
-          p.mb-0( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
+          p.mb-0.unselectable( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
 
           .dd.d-none
 
             .d-flex( @click="$router.push('/dashboard')" ).align-items-center.justify-content-start
               span.material-icons-outlined.md-24 dashboard
-              p.mb-0 Dashboard
+              p.mb-0.unselectable Dashboard
 
             .d-flex( @click="$router.push('/dashboard/profile')" ).align-items-center.justify-content-start
               span.material-icons-outlined.md-24 account_circle
-              p.mb-0 Profile
+              p.mb-0.unselectable Profile
 
             .d-flex( @click="$router.push('/dashboard/cart')" ).align-items-center.justify-content-start
               span.material-icons-outlined.md-24 shopping_cart
-              p.mb-0 Cart
+              p.mb-0.unselectable Cart
 
             .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
               span.material-icons-outlined.md-24 logout
-              p.mb-0 Logout
+              p.mb-0.unselectable Logout
 
 
   main( v-if="pageLayout === 'surface'" data-surface )
