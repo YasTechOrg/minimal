@@ -6,7 +6,7 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
     action="/api/controller/account/login"
   )
 
-  img( src="../../assets/img/brand/logo.png" alt="Minimal" )
+  img.cursor-pointer( src="../../assets/img/brand/logo.png" alt="Minimal" @click="$router.push('/')" )
 
   input( :value="require('@/csrfManager').getToken()" name="_csrf" hidden )
 
