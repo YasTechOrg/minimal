@@ -1,54 +1,6 @@
 @import ../public/colors
 @import ../public/fonts
 
-.profile_circle
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25)
-  border-radius: 360px
-  height: 45px
-  width: 45px
-  display: flex
-  align-items: center
-  justify-content: center
-
-  p
-    line-height: 18px
-    font-size: 18px
-
-  .dd
-    width: 250px
-    position: absolute
-    background-color: white
-    top: 40px
-    right: 20px
-    border-radius: 10px
-    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
-    z-index: 99
-    padding: 8px
-
-    div
-      padding: 8px
-
-      span
-        color: $accent_gray2
-
-      p
-        margin-left: 16px
-        font-family: ubuntu, serif
-        font-size: 18px
-        line-height: 18px
-
-    div:hover
-      background-color: $accent_green
-      border-radius: 8px
-
-      span, p
-        color: white!important
-
-.profile_circle:hover
-
-  .dd
-    display: block!important
-
 header[data-main]
   background-color: #fff
   padding: 24px 12px
@@ -94,9 +46,6 @@ header[data-main]
       button:hover
         box-shadow: unset
 
-      .user
-        @extend .profile_circle
-
   .inner.mobile
 
     .logo
@@ -115,9 +64,6 @@ header[data-main]
 
       button:hover
         box-shadow: unset
-
-      .user
-        @extend .profile_circle
 
 @media screen and (max-width: 850px)
 
