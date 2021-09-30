@@ -53,25 +53,7 @@
 
         button( @click="$router.push('/account/login')" v-if="!cAtuh" ) Login
 
-        .user.cursor-pointer.position-relative( v-else )
-          p.mb-0( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
-          .dd.d-none
-
-            .d-flex( @click="$router.push('/dashboard')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 dashboard
-              p.mb-0 Dashboard
-
-            .d-flex( @click="$router.push('/dashboard/profile')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 account_circle
-              p.mb-0 Profile
-
-            .d-flex( @click="$router.push('/dashboard/cart')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 shopping_cart
-              p.mb-0 Cart
-
-            .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 logout
-              p.mb-0 Logout
+        MinimalProfile( v-else v-if="Object.keys(userInfo).length !== 0" :email="userInfo['email']" :name="userInfo['firstname']" menu="true" )
 
     .inner.d-flex.justify-content-between.w-100.align-items-center.mobile.d-none
 
@@ -88,27 +70,7 @@
         button.d-flex.justify-content-center.align-items-center( @click="$router.push('/account/login')" v-if="!cAtuh" )
           img( src="../assets/img/images/login_white.png" alt="login" )
 
-        .user.position-relative( v-else )
-
-          p.mb-0.unselectable( v-if="Object.keys(userInfo).length !== 0" ) {{ userInfo["firstname"][0] }}
-
-          .dd.d-none
-
-            .d-flex( @click="$router.push('/dashboard')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 dashboard
-              p.mb-0.unselectable Dashboard
-
-            .d-flex( @click="$router.push('/dashboard/profile')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 account_circle
-              p.mb-0.unselectable Profile
-
-            .d-flex( @click="$router.push('/dashboard/cart')" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 shopping_cart
-              p.mb-0.unselectable Cart
-
-            .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
-              span.material-icons-outlined.md-24 logout
-              p.mb-0.unselectable Logout
+        MinimalProfile( v-else v-if="Object.keys(userInfo).length !== 0" :email="userInfo['email']" :name="userInfo['firstname']" menu="true" )
 
 
   main( v-if="pageLayout === 'surface'" data-surface )
@@ -166,8 +128,14 @@ import { Options, Vue } from 'vue-class-component'
 import { checkAuth, removeAuth, getAuth } from "@/authManager"
 import axios from "axios"
 import { getToken } from "@/csrfManager"
+import MinimalProfile from "@/components/elements/MinimalProfile.vue"
 
 @Options({
+
+  // App Components
+  components: {
+    MinimalProfile
+  },
 
   // App Varibales
   data()
@@ -183,7 +151,7 @@ import { getToken } from "@/csrfManager"
     // Set Layout Title
     $route: {
       immediate: true,
-      handler(to)
+      async handler(to)
       {
         // Set Title
         document.title = to.meta.title || `Minimal`
@@ -200,8 +168,16 @@ import { getToken } from "@/csrfManager"
             document.getElementById("mobile_menu")!.classList.add("d-none")
           }
 
+          // Show Loading
+          document.getElementById("loader-wrapper")!.classList.remove("d-none")
+
           // Load Page
-          this.load()
+          await this.load()
+
+          await new Promise(resolve => setTimeout(resolve, 1000))
+
+          // Hide Loading
+          document.getElementById("loader-wrapper")!.classList.add("d-none")
         }
       }
     },
@@ -213,9 +189,6 @@ import { getToken } from "@/csrfManager"
     // On App Load
     async load()
     {
-      // Show Loading
-      document.getElementById("loader-wrapper")!.classList.remove("d-none")
-
       // Check Login
       if (checkAuth())
       {
@@ -275,9 +248,6 @@ import { getToken } from "@/csrfManager"
           this.$router.push("/account/login")
         }
       }
-
-
-      document.getElementById("loader-wrapper")!.classList.add("d-none")
     },
 
     // Logout
@@ -292,6 +262,34 @@ import { getToken } from "@/csrfManager"
     toggleMobileMenu()
     {
       document.getElementById("mobile_menu")!.classList.toggle("d-none")
+    },
+
+    // Get Browser Version
+    getBrowserVersion()
+    {
+      var ua = navigator.userAgent
+      var tem
+      var M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+
+      if(/trident/i.test(M[1]))
+      {
+        tem =  /\brv[ :]+(\d+)/g.exec(ua) || []
+
+        return 'IE ' + (tem[1] || '')
+      }
+
+      if(M[1] === 'Chrome')
+      {
+        tem = ua.match(/\b(OPR|Edge)\/(\d+)/)
+
+        if(tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera')
+      }
+
+      M = M[2]? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?']
+
+      if((tem= ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1])
+
+      return M.join(' ')
     }
   },
 
