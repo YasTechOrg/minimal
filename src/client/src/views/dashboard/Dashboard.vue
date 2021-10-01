@@ -30,7 +30,15 @@
 
     p.mb-0 Cart
 
-    .content
+    .content.d-flex.flex-column
+
+      ProductCartCard1(
+        v-for="product in pr"
+        :key="product"
+        :product="product"
+        @inc=""
+        @dec=""
+      )
 
 
 </template>
@@ -38,19 +46,46 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import MinimalProfile from "@/components/elements/MinimalProfile.vue"
+import ProductCartCard1 from "@/components/ProductCartCard1.vue"
 
 @Options({
 
   // Page Components
   components: {
-    MinimalProfile
+    MinimalProfile,
+    ProductCartCard1
   },
 
   // Page Variables
   data()
   {
     return {
-      userInfo: {}
+      pr: [
+        {
+          p_id: "nonfinofnif",
+          p_name: "Men’s Shirt",
+          p_image: "",
+          p_code: "1204",
+          p_price: 12000,
+          p_num: 4
+        },
+        {
+          p_id: "nonfinofnif",
+          p_name: "Men’s Shirt",
+          p_image: "",
+          p_code: "1204",
+          p_price: 12000,
+          p_num: 4
+        },
+        {
+          p_id: "nonfinofnif",
+          p_name: "Men’s Shirt",
+          p_image: "",
+          p_code: "1204",
+          p_price: 12000,
+          p_num: 4
+        }
+      ]
     }
   },
 

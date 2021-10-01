@@ -2,7 +2,6 @@
 
 .card_1
   background-color: white
-  width: 410px
   margin-top: 18px
   border-radius: 10px
 
@@ -11,6 +10,7 @@
   > .uif_card
     @extend .card_1
     padding: 24px
+    width: 410px
 
     > .header > .tp
       p
@@ -62,6 +62,7 @@
     @extend .card_1
     margin-left: 18px
     padding: 20px
+    width: 500px
 
     > p
       font-size: 20px
@@ -75,15 +76,18 @@
 
 @media screen and (max-width: 1208px)
 
-  #dashboard > div
-    width: 100%!important
-    margin-right: 0!important
-    margin-left: 0!important
+  #dashboard
+    flex-wrap: wrap
 
-  #dashboard > .uif_card > .header.desk
-    display: none!important
+    > div
+      width: 100%!important
+      margin-right: 0!important
+      margin-left: 0!important
 
-  #dashboard > .uif_card > .header.mobile
-    display: flex!important
+    > .uif_card > .header.desk
+      display: none!important
+
+    > .uif_card > .header.mobile
+      display: flex!important
 
 
