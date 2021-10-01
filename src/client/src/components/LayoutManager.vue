@@ -53,7 +53,13 @@
 
         button( @click="$router.push('/account/login')" v-if="!cAtuh" ) Login
 
-        MinimalProfile( v-else v-if="Object.keys(userInfo).length !== 0" :email="userInfo['email']" :name="userInfo['firstname']" menu="true" )
+        MinimalProfile(
+          v-else-if="Object.keys(userInfo).length !== 0"
+          :email="userInfo['email']"
+          :name="userInfo['firstname']"
+          @logout="logoutUser"
+          menu="true"
+        )
 
     .inner.d-flex.justify-content-between.w-100.align-items-center.mobile.d-none
 
@@ -70,7 +76,13 @@
         button.d-flex.justify-content-center.align-items-center( @click="$router.push('/account/login')" v-if="!cAtuh" )
           img( src="../assets/img/images/login_white.png" alt="login" )
 
-        MinimalProfile( v-else v-if="Object.keys(userInfo).length !== 0" :email="userInfo['email']" :name="userInfo['firstname']" menu="true" )
+        MinimalProfile(
+          v-else-if="Object.keys(userInfo).length !== 0"
+          :email="userInfo['email']"
+          :name="userInfo['firstname']"
+          @logout="logoutUser"
+          menu="true"
+        )
 
 
   main( v-if="pageLayout === 'surface'" data-surface )
@@ -125,10 +137,10 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { checkAuth, removeAuth, getAuth } from "@/authManager"
 import axios from "axios"
 import { getToken } from "@/csrfManager"
 import MinimalProfile from "@/components/elements/MinimalProfile.vue"
+import {mapGetters} from "vuex";
 
 @Options({
 
@@ -141,7 +153,9 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
   data()
   {
     return {
-      userInfo: {}
+      userInfo: {
+        email: ""
+      }
     }
   },
 
@@ -174,8 +188,6 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
           // Load Page
           await this.load()
 
-          await new Promise(resolve => setTimeout(resolve, 1000))
-
           // Hide Loading
           document.getElementById("loader-wrapper")!.classList.add("d-none")
         }
@@ -190,9 +202,9 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
     async load()
     {
       // Check Login
-      if (checkAuth())
+      if (this.$store.state.at !== "")
       {
-        const d: any = localStorage.getItem("at_time")
+        const d: any = this.$store.state.at_time
         const date1: any = new Date(d)
         const date2: any = new Date()
         const diffTime = Math.abs(date2 - date1)
@@ -201,7 +213,8 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
         // Check if expired
         if (diffDays >= 5)
         {
-          removeAuth()
+          this.$store.commit("removeAuth")
+
           if (this.pageLayout === 'dashboard')
           {
             this.$router.push("/account/login?res=expi")
@@ -221,18 +234,18 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
             .get("/api/rest/account/user/get", {
               headers: {
                 "_csrf" : getToken(),
-                "Authorization": getAuth()
+                "Authorization": this.getAuth
               }
             })
             .then(value =>
             {
               resolve(value.data)
 
-              localStorage.setItem("userData", JSON.stringify(value.data))
+              this.$store.commit("setUserData", value.data)
             })
             .catch(() =>
             {
-              removeAuth()
+              this.$store.commit("removeAuth")
 
               if (this.pageLayout === 'dashboard')
               {
@@ -253,9 +266,7 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
     // Logout
     logoutUser()
     {
-      localStorage.removeItem("at")
-      localStorage.removeItem("userData")
-      location.reload()
+      this.$router.push("/account/login?res=logout")
     },
 
     // Toggle Mobile Menu
@@ -305,8 +316,12 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
     // Check Auth
     cAtuh(): boolean
     {
-      return checkAuth()
-    }
+      return this.$store.state.at !== ""
+    },
+
+    ...mapGetters([
+        "getAuth"
+    ])
   }
 })
 

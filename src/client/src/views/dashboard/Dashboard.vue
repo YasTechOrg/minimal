@@ -1,6 +1,7 @@
+<!--suppress ALL -->
 <template lang="pug">
 
-#dashboard.d-flex.justify-content-start.align-items-start.flex-wrap
+#dashboard.d-flex.justify-content-start.align-items-start
 
   .uif_card
 
@@ -36,7 +37,6 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { setAuth } from "@/authManager"
 import MinimalProfile from "@/components/elements/MinimalProfile.vue"
 
 @Options({
@@ -63,12 +63,30 @@ import MinimalProfile from "@/components/elements/MinimalProfile.vue"
     // Check If Url Have Token
     if (token != null && token !== "")
     {
-      setAuth(token)
+      this.$store.commit("setAuth", token)
       location.href = "/dashboard"
     }
 
-    // Get User Info
-    this.userInfo = JSON.parse(String(localStorage.getItem("userData")))
+  },
+
+  // Page Computed Variables
+  computed: {
+
+    // Return User Data
+    userInfo()
+    {
+      return this.$store.state.userData
+    }
+  },
+
+  // Page Methods
+  methods: {
+
+    // Increase Cart Value
+    increaseCart(id)
+    {
+
+    }
   }
 })
 

@@ -59,6 +59,16 @@ import { Options, Vue } from 'vue-class-component'
       res: this.$route.query.res
     }
   },
+
+  // On Page Load
+  mounted()
+  {
+    if (this.res === "logout")
+    {
+      this.$store.commit("removeAuth")
+      location.href = "/account/login"
+    }
+  }
 })
 
 export default class Login extends Vue {}
