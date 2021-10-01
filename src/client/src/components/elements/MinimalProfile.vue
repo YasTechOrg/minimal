@@ -18,7 +18,7 @@
       span.material-icons-outlined.md-24 shopping_cart
       p.mb-0 Cart
 
-    .d-flex( @click="logoutUser" ).align-items-center.justify-content-start
+    .d-flex( @click="$emit('logout')" ).align-items-center.justify-content-start
       span.material-icons-outlined.md-24 logout
       p.mb-0 Logout
 
