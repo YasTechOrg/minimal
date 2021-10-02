@@ -15,6 +15,8 @@ class UserDetail
     private var forgot: Boolean? = false,
     private var forgotCode: String?,
     private var confirmCode: String?,
+    private var products: MutableList<String>?,
+    private var name: String?,
 ) : UserDetails
 {
     fun build(user: User): UserDetail
@@ -27,7 +29,9 @@ class UserDetail
             mutableListOf(SimpleGrantedAuthority(user.role!!.name)),
             user.forgot,
             user.forgotCode,
-            user.confirmCode
+            user.confirmCode,
+            user.products,
+            user.name
         )
     }
 
