@@ -1,0 +1,93 @@
+@import ../public/colors
+
+.card_1
+  background-color: white
+  margin-top: 18px
+  border-radius: 10px
+
+#dashboard
+
+  > .uif_card
+    @extend .card_1
+    padding: 24px
+    width: 410px
+
+    > .header > .tp
+      p
+        font-family: roboto, serif
+
+      > p:first-child
+        margin-bottom: 5px
+        text-transform: uppercase
+        letter-spacing: 3px
+        font-size: 20px
+        line-height: 20px
+
+      > p:last-child
+        font-size: 18px
+        line-height: 18px
+        text-transform: lowercase
+        color: $accent_gray5
+
+    > .header.desk > .tp
+      margin-left: 16px
+
+    > .header.mobile > .tp
+      margin-top: 16px
+
+    > .content
+      margin-top: 20px
+
+      > button
+        border: none
+        margin-top: 15px
+        background-color: white
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
+        border-radius: 5px
+        padding: 16px
+        font-family: roboto, serif
+        text-transform: uppercase
+        letter-spacing: 3px
+        color: $accent_gray5
+
+      > button:hover
+        outline: none
+        border: none
+        background-color: unset
+        background-image: linear-gradient(90deg, #FC9700, #FCB500)!important
+        color: white
+
+
+  .cart_card
+    @extend .card_1
+    margin-left: 18px
+    padding: 20px
+    width: 500px
+
+    > p
+      font-size: 20px
+      line-height: 20px
+      font-family: roboto, serif
+      text-transform: uppercase
+      letter-spacing: 5px
+
+    > .content
+      padding-top: 16px
+
+@media screen and (max-width: 1208px)
+
+  #dashboard
+    flex-wrap: wrap
+
+    > div
+      width: 100%!important
+      margin-right: 0!important
+      margin-left: 0!important
+
+    > .uif_card > .header.desk
+      display: none!important
+
+    > .uif_card > .header.mobile
+      display: flex!important
+
+

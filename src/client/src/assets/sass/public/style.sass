@@ -7,6 +7,14 @@ body
 .cursor-pointer
   cursor: pointer!important
 
+
+.unselectable
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
 #loader-wrapper
   position: fixed!important
   left: 0!important
@@ -20,3 +28,39 @@ body
   img
     width: 150px
     height: 150px
+
+#mobile_menu
+  z-index: 999
+  position: absolute
+  top: 93px
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: rgba(0, 0, 0, 0.40)
+
+  div
+    background-color: white
+    border-top: 1px solid $accent_gray1
+    padding: 0 20px 20px 20px
+
+    a
+      font-size: 25px
+      line-height: 25px
+      letter-spacing: 4px
+      margin-top: 20px
+      text-decoration: none
+      color: $accent_gray1
+
+    a.ac, a:hover
+      color: black
+
+    div
+      padding: 0
+      border: none
+
+      div
+        padding: 0
+        border: none
+        margin-top: 20px
+        height: 1px
+        background-color: #D0D0D0

@@ -6,6 +6,12 @@ import About from "@/views/surface/About.vue"
 import Contact from "@/views/surface/Contact.vue"
 import Login from "@/views/account/Login.vue"
 import Register from "@/views/account/Register.vue"
+import Dashboard from "@/views/dashboard/Dashboard.vue"
+import Cart from "@/views/dashboard/Cart.vue";
+import Payment from "@/views/dashboard/Payment.vue";
+import Purchase from "@/views/dashboard/Purchase.vue";
+import Profile from "@/views/dashboard/Profile.vue";
+import Ticket from "@/views/dashboard/Ticket.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -49,6 +55,42 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Register',
     component: Register,
     meta: { layout: "account" },
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: { layout: "dashboard", nav: "Dashboard" },
+  },
+  {
+    path: '/dashboard/cart',
+    name: 'Cart',
+    component: Cart,
+    meta: { layout: "dashboard", nav: "Dashboard / Cart" },
+  },
+  {
+    path: '/dashboard/payment',
+    name: 'Payment',
+    component: Payment,
+    meta: { layout: "dashboard", nav: "Dashboard / Payment" },
+  },
+  {
+    path: '/dashboard/purchase',
+    name: 'Purchase',
+    component: Purchase,
+    meta: { layout: "dashboard", nav: "Dashboard / Purchase" },
+  },
+  {
+    path: '/dashboard/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: { layout: "dashboard", nav: "Dashboard / Profile" },
+  },
+  {
+    path: '/dashboard/ticket',
+    name: 'Ticket',
+    component: Ticket,
+    meta: { layout: "dashboard", nav: "Dashboard / Ticket" },
   }
 ]
 

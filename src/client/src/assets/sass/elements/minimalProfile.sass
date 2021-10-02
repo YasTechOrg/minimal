@@ -1,0 +1,58 @@
+@import ../public/colors
+@import ../public/fonts
+
+.minimalProfile
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25)!important
+  border-radius: 360px!important
+  height: 45px
+  width: 45px
+  display: flex
+  align-items: center!important
+  justify-content: center!important
+
+  p
+    line-height: 18px!important
+    font-size: 18px!important
+
+  .dd
+    width: 250px!important
+    position: absolute!important
+    background-color: white!important
+    top: 40px!important
+    right: 20px!important
+    border-radius: 10px!important
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)!important
+    z-index: 99!important
+    padding: 8px!important
+
+    div
+      padding: 8px!important
+
+      span
+        color: $accent_gray2
+
+      p
+        margin-left: 16px!important
+        font-family: ubuntu, serif!important
+        font-size: 18px!important
+        line-height: 18px!important
+
+    div:hover
+      background-color: $accent_green!important
+      border-radius: 8px!important
+
+      span, p
+        color: white!important
+
+.minimalProfile:hover
+
+  .dd
+    display: block!important
+
+.minimalProfile.size2
+  width: 80px
+  height: 80px
+
+  p
+    line-height: 25px!important
+    font-size: 25px!important

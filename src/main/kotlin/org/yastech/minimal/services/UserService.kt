@@ -4,8 +4,6 @@ import org.springframework.stereotype.Service
 import org.yastech.minimal.data.PasswordEncoder
 import org.yastech.minimal.tables.User
 import org.yastech.minimal.tables.UserRepository
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @Service
 class UserService
@@ -34,6 +32,11 @@ class UserService
 
         user.accepted = false
 
+        repository.save(user).subscribe()
+    }
+
+    fun update(user: User)
+    {
         repository.save(user).subscribe()
     }
 }

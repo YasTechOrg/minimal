@@ -3,15 +3,17 @@ package org.yastech.minimal.controllers
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
+import org.yastech.minimal.data.HexConvertor
 import org.yastech.minimal.data.PasswordEncoder
+import org.yastech.minimal.data.USERS
 import org.yastech.minimal.security.JWTUtils
 import org.yastech.minimal.security.UserAuthenticator
+import org.yastech.minimal.services.EmailService
 import org.yastech.minimal.services.UserService
 import org.yastech.minimal.tables.User
+import javax.servlet.http.HttpServletRequest
+import kotlin.random.Random
 
 
 @Controller
@@ -22,6 +24,8 @@ class AccountController
     private var passwordEncoder: PasswordEncoder,
     private var userAuthenticator: UserAuthenticator,
     private var jwtUtils: JWTUtils,
+    private var emailService: EmailService,
+    private var hexConvertor: HexConvertor,
 )
 {
     @PostMapping("/login")
@@ -65,10 +69,17 @@ class AccountController
     }
 
     @PostMapping("/register")
-    fun register(@ModelAttribute("user") user: User, bindingResult: BindingResult): String
+    fun register(@ModelAttribute("user") user: User, bindingResult: BindingResult, httpServletRequest: HttpServletRequest): String
     {
         return if (!userService.exist(user.email))
         {
+            val code = hexConvertor.encode("verify-${user.email}-${ Random.nextInt(100, 1000000) }")
+
+            user.confirmCode = code
+            user.role = USERS.NORMAL_USER
+
+            emailService.sendRegisterEmail(user.email, code, httpServletRequest)
+
             userService.add(user)
 
             "redirect:/account/login?res=d_reg"
@@ -76,6 +87,34 @@ class AccountController
         else
         {
             "redirect:/account/register?res=exi"
+        }
+    }
+
+    @GetMapping("/confirm")
+    fun confirm(@RequestParam code: String): String
+    {
+        val username = hexConvertor.decode(code).split("-")[1]
+
+        return if (userService.exist(username))
+        {
+            if (userService.get(username).confirmCode == code)
+            {
+                val user = userService.get(username)
+
+                user.accepted = true
+
+                userService.update(user)
+
+                "redirect:/account/login?res=c_done"
+            }
+            else
+            {
+                "redirect:/account/login?res=c_err"
+            }
+        }
+        else
+        {
+            "redirect:/account/login?res=c_err"
         }
     }
 }

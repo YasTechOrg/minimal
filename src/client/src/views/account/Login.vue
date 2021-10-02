@@ -6,7 +6,7 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
     action="/api/controller/account/login"
   )
 
-  img( src="../../assets/img/brand/logo.png" alt="Minimal" )
+  img.cursor-pointer( src="../../assets/img/brand/logo.png" alt="Minimal" @click="$router.push('/')" )
 
   input( :value="require('@/csrfManager').getToken()" name="_csrf" hidden )
 
@@ -29,8 +29,17 @@ form#login.d-flex.justify-content-center.align-items-center.flex-column(
   .al3.alert.alert-danger.w-100( role="alert" v-if="res === 'acp'" )
     | This account has not been verified!
 
-  .al4.alert.alert-success.w-100( role="alert" v-if="res === 'd_reg'" )
+  .al4.alert.alert-danger.w-100( role="alert" v-if="res === 'c_err'" )
+    | Verify code is incorrect!
+
+  .al5.alert.alert-danger.w-100( role="alert" v-if="res === 'expi'" )
+    | Your login has expired!
+
+  .al6.alert.alert-success.w-100( role="alert" v-if="res === 'd_reg'" )
     | Your account has been created, please verify your account via the email sent to you.
+
+  .al7.alert.alert-success.w-100( role="alert" v-if="res === 'c_done'" )
+    | Your account has been verified! please login.
 
   p.mb-0.dn Don't have an account? #[a.cursor-pointer( @click="$router.push('/account/register')" ) Register]
 
@@ -50,6 +59,16 @@ import { Options, Vue } from 'vue-class-component'
       res: this.$route.query.res
     }
   },
+
+  // On Page Load
+  mounted()
+  {
+    if (this.res === "logout")
+    {
+      this.$store.commit("removeAuth")
+      location.href = "/account/login"
+    }
+  }
 })
 
 export default class Login extends Vue {}

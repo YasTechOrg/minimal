@@ -16,6 +16,7 @@ data class User
     var role: USERS?,
     var forgot: Boolean? = false,
     var forgotCode: String?,
+    var confirmCode: String?,
     var accepted: Boolean?
 )
 
