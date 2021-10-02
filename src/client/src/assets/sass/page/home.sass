@@ -13,6 +13,96 @@
   font-size: 40px
   color: $accent_gray3
 
+.productCards
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
+  border-radius: 10px
+  padding: 14px 12px
+  max-width: 320px
+  min-width: 190px
+
+  .topSection
+    img
+      max-width: 200px
+      width: 75%
+      height: auto
+
+    .options
+      align-items: end
+
+      img
+        height: 24px
+        width: 24px
+
+      img:last-child
+        height: 18px
+        width: 14px
+
+      div
+        align-items: center
+
+        img:last-child
+          height: 18px
+          width: 20px
+
+        p
+          margin-bottom: 0
+          font-size: 18px
+          color: #858585
+
+  .middleSection
+    .details
+      text-align: left
+      width: 60%
+
+      p
+        text-overflow: ellipsis
+        overflow: hidden
+        width: auto
+        white-space: nowrap
+        font-size: 10px
+        margin-bottom: 0
+
+      p:first-child
+        font-size: 20px
+
+    .colors
+      max-width: 90px
+      width: 40%
+
+      div
+        .outline
+          height: 20px
+          width: 20px
+          border-radius: 50%
+          background-color: white
+          padding: 1px
+
+          .productColor
+            width: 16px
+            height: 16px
+            border-radius: 50%
+
+  .bottomSection
+    margin-top: 30px
+
+    p
+      font-family: ubuntu, serif
+      font-size: 20px
+      color: black
+
+    button
+      background-color: rgba(242, 145, 131, 0.78)
+      border-radius: 10px
+      height: 50px
+      width: 50px
+      margin-top: auto
+      box-shadow: none
+
+
+.offStyle
+  color: #9E9E9E
+  text-decoration: line-through
+
 #home
   background-color: whitesmoke
   padding: 85px 60px
@@ -40,8 +130,22 @@
         font-size: 18px
         font-family: roboto, serif
 
-    p
-      @extend .sectionsTitle
+
+    .productsCardsRow
+      margin: 0
+      padding: 0 45px
+
+
+@media screen and (max-width: 1120px)
+  .productCards
+    max-width: 480px
+    width: 80px
+
+  .productsCardsRow
+    display: none
+
+  .CardsSlider
+    display: block !important
 
 
 @media screen and (max-width: 850px)

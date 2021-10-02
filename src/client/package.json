@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.10.1",
-    "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0",
+    "vue3-carousel": "^0.1.27",
     "vuex": "^4.0.0-0",
     "vuex-persistedstate": "^4.1.0"
   },
