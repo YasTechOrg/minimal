@@ -30,15 +30,19 @@
 
     p.mb-0 Cart
 
-    .content.d-flex.flex-column
+    .content
 
-      ProductCartCard1(
-        v-for="product in pr"
-        :key="product"
-        :product="product"
-        @inc=""
-        @dec=""
-      )
+      .c.d-flex.flex-column( v-if="products.length !== 0" )
+
+        ProductCartCard1(
+          v-for="product in products"
+          :key="product"
+          :product="product"
+        )
+
+      .nf( v-else )
+
+        p.mb-0 You cart is empty!
 
 
 </template>
@@ -60,32 +64,7 @@ import ProductCartCard1 from "@/components/ProductCartCard1.vue"
   data()
   {
     return {
-      pr: [
-        {
-          p_id: "nonfinofnif",
-          p_name: "Men’s Shirt",
-          p_image: "",
-          p_code: "1204",
-          p_price: 12000,
-          p_num: 4
-        },
-        {
-          p_id: "nonfinofnif",
-          p_name: "Men’s Shirt",
-          p_image: "",
-          p_code: "1204",
-          p_price: 12000,
-          p_num: 4
-        },
-        {
-          p_id: "nonfinofnif",
-          p_name: "Men’s Shirt",
-          p_image: "",
-          p_code: "1204",
-          p_price: 12000,
-          p_num: 4
-        }
-      ]
+
     }
   },
 
@@ -101,7 +80,6 @@ import ProductCartCard1 from "@/components/ProductCartCard1.vue"
       this.$store.commit("setAuth", token)
       location.href = "/dashboard"
     }
-
   },
 
   // Page Computed Variables
@@ -111,16 +89,12 @@ import ProductCartCard1 from "@/components/ProductCartCard1.vue"
     userInfo()
     {
       return this.$store.state.userData
-    }
-  },
+    },
 
-  // Page Methods
-  methods: {
-
-    // Increase Cart Value
-    increaseCart(id)
+    // Products
+    products(): string[]
     {
-
+      return this.$store.state.cart
     }
   }
 })

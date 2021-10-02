@@ -16,12 +16,12 @@
 
   .right.d-flex.align-items-center.justify-content-end
 
-    span.material-icons.md-24.cursor-pointer.unselectable( @click="$emit('dec', product['id'])" )
+    span.material-icons.md-24.cursor-pointer.unselectable( @click="decrease" )
       | remove
 
     p.mb-0 {{ product["p_num"] }}
 
-    span.material-icons.md-24.cursor-pointer.unselectable( @click="$emit('inc', product['id'])" )
+    span.material-icons.md-24.cursor-pointer.unselectable( @click="increase" )
       | add
 
 </template>
@@ -33,6 +33,28 @@ import { Options, Vue } from 'vue-class-component'
 
   // Element Props
   props: ["product"],
+
+  // Element Methods
+  methods: {
+
+    // Increase Cart
+    increase()
+    {
+      this.$store.commit("addToCart", {
+        p_id : this.product["p_id"],
+        p_name: this.product["p_name"],
+        p_image: this.product["p_image"],
+        p_code: this.product["p_code"],
+        p_price: this.product["p_price"]
+      })
+    },
+
+    // Decrease Cart
+    decrease()
+    {
+      this.$store.commit("removeFromCart", this.product["p_id"])
+    }
+  }
 })
 
 export default class ProductCartCard1 extends Vue {}
