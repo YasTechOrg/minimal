@@ -140,7 +140,7 @@ import { Options, Vue } from 'vue-class-component'
 import axios from "axios"
 import { getToken } from "@/csrfManager"
 import MinimalProfile from "@/components/elements/MinimalProfile.vue"
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex"
 
 @Options({
 
@@ -233,7 +233,7 @@ import {mapGetters} from "vuex";
           axios
             .get("/api/rest/account/user/get", {
               headers: {
-                "_csrf" : getToken(),
+                "_csrf" : getToken() as any,
                 "Authorization": this.getAuth
               }
             })
