@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import "@/assets/lib/w3.css"
 import "@/assets/lib/google_icons.css"
+import 'vue3-carousel/dist/carousel.css';
 
 const app = createApp(App)
 app.use(store)
