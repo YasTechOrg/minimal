@@ -432,8 +432,8 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component'
-import { Carousel, Slide,Navigation} from 'vue3-carousel';
+import { Options, Vue } from 'vue-class-component'
+import { Carousel, Slide,Navigation } from 'vue3-carousel';
 
 @Options({
   components:{
