@@ -4,10 +4,12 @@
 #home
   .inSalesProducts
 
-    .input-group.searchInput.w-50.me-auto.ms-auto.d-flex.justify-content-between.position-relative
+    form.input-group.searchInput.w-50.me-auto.ms-auto.d-flex.justify-content-between.position-relative(
+      method="GET"
+      action="/search"
+    )
 
-        input.form-control( placeholder="Search everything you want..." )
-        input.form-control.d-none( placeholder="Search..." )
+        input.form-control( placeholder="Search everything you want..." name="q" type="text" )
         img.input-group-text( src="../../assets/img/icons/icon_search.svg" alt="Search Icon" )
 
     p.sectionsTitle IN SALES PRODUCTS
@@ -433,16 +435,20 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { Carousel, Slide,Navigation } from 'vue3-carousel';
+import { Carousel, Slide,Navigation } from 'vue3-carousel'
 
 @Options({
-  components:{
+  components: {
     Carousel,
     Slide,
     Navigation
   },
-  data(){
-    return{
+
+  data()
+  {
+    return {
+      windowWidth: window.innerWidth,
+
       breakpoints: {
 
         // Mobile
@@ -456,11 +462,48 @@ import { Carousel, Slide,Navigation } from 'vue3-carousel';
         },
       },
     }
-  }
+  },
+
+  mounted()
+  {
+    this.$nextTick(() =>
+    {
+      window.addEventListener('resize', this.onResize)
+    })
+  },
+
+  beforeDestroy()
+  {
+    window.removeEventListener('resize', this.onResize)
+  },
+
+  methods: {
+    onResize()
+    {
+      this.windowWidth = window.innerWidth
+    }
+  },
+
+  watch: {
+    windowWidth()
+    {
+      if(this.windowWidth < 576)
+      {
+        document
+            .querySelector("#home > .inSalesProducts > form > input")!
+            .setAttribute("placeholder", "Search...")
+      }
+      else
+      {
+        document
+            .querySelector("#home > .inSalesProducts > form > input")!
+            .setAttribute("placeholder", "Search everything you want...")
+      }
+    }
+  },
 })
 
-export default class Home extends Vue {
-}
+export default class Home extends Vue {}
 </script>
 
 <style src="../../assets/sass/page/home.sass" lang="sass"/>
