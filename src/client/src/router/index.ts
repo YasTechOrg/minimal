@@ -13,6 +13,7 @@ import Purchase from "@/views/dashboard/Purchase.vue"
 import Profile from "@/views/dashboard/Profile.vue"
 import Ticket from "@/views/dashboard/Ticket.vue"
 import CS50 from "@/views/surface/CS50.vue"
+import Search from "@/views/surface/Search.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -31,6 +32,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/shops',
     name: 'Shops',
     component: Shops,
+    meta: { layout: "surface" },
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
     meta: { layout: "surface" },
   },
   {
