@@ -1,7 +1,15 @@
+<!--suppress ALL -->
 <template lang="pug">
 
 #categories
-  h1 Categories
+  .pageContainer
+
+    p.pageTitle.mb-4 CATEGORIES
+
+    .input-group.searchInput.d-flex.justify-content-between
+
+      input.form-control( placeholder="Search Categories"  type="text" )
+      img.input-group-text( src="../../assets/img/icons/icon_search.svg" alt="Search Icon" )
 
 </template>
 
@@ -14,3 +22,5 @@ import { Options, Vue } from 'vue-class-component'
 
 export default class Categories extends Vue {}
 </script>
+
+<style src="../../assets/sass/page/categories.sass" lang="sass"/>
