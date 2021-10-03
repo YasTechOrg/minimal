@@ -2,7 +2,7 @@
 <template lang="pug">
 
 #home
-  .inSalesProducts
+  .inSalesProducts.pt-4.pb-4.ps-5.pe-5
 
     form.input-group.searchInput.w-50.me-auto.ms-auto.d-flex.justify-content-between.position-relative(
       method="GET"
@@ -14,419 +14,104 @@
 
     p.sectionsTitle IN SALES PRODUCTS
 
-    .row.productsCardsRow
+    .row.m-0.pt-4.productsRowDisplay
+      .col-3.p-2( v-for="i in 8" :key="i" )
+        ProductsCart
 
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
+    carousel.CardsSlider.pt-4.d-none( snap-align="center" :breakpoints="breakpoints" )
 
-            img( src="../../assets/img/images/products_shirt.png" alt="Product")
+      Slide.p-2( v-for="i in 8" :key="i" )
+        ProductsCart
 
-            .options.d-flex.flex-column
 
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
+      template( #addons )
+        navigation
 
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
 
-          .middleSection.d-flex.justify-content-between
 
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
+  .topSales.mt-5.pt-4.pb-4.ps-5.pe-5
 
-            .colors
+    p.sectionsTitle.pt-4 TOP SALAES
 
-              div.d-flex.pt-1
+    .row.m-0.pt-4
 
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
+      .col-6.topSales_special.topSalesWidth.d-flex.justify-content-center
 
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
+        .d-flex.flex-column.justify-content-between
 
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
+          div
+            img( src="../../assets/img/images/products_hoodi.png" )
 
-          .bottomSection.d-flex.justify-content-between
+            p.fst-italic Boys Special Hoodies
+            p ADIDAS
+            p.fw-bold 20,000$
 
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
+          button.btn
+            p Add to card
 
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
+      .col-6.topSalesWidth
 
-            img( src="../../assets/img/images/products_Tshirt.png" alt="Product")
+        .row.ps-2.productsRowDisplay
+          .col-6.p-2( v-for="i in 4" :key="i" )
+            ProductsCart
 
-            .options.d-flex.flex-column
+        carousel.CardsSlider.d-none( snap-align="center" :breakpoints="breakpoints" )
 
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
+          Slide.p-2( v-for="i in 8" :key="i" )
+            ProductsCart
 
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
 
-          .middleSection.d-flex.justify-content-between
+          template(#addons)
+            navigation
 
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
 
-            .colors
+  .newest.mt-5.pt-4.pb-4.ps-5.pe-5
 
-              div.d-flex.pt-1
+    p.sectionsTitle.pt-4 NEWEST
 
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
+    carousel.mt-4.CardsSlider( snap-align="center" :breakpoints="breakpoints" )
 
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shoes.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shirt.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_Tshirt.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shoes.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shoes.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-      .col-3.p-2
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shirt.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-
-
-
-
-
-    carousel.CardsSlider.d-none( snap-align="center" :breakpoints="breakpoints" )
-
-      Slide.p-2( v-for="i in 7" :key="i" )
-        .productCards
-          .topSection.d-flex.justify-content-between
-
-            img( src="../../assets/img/images/products_shirt.png" alt="Product")
-
-            .options.d-flex.flex-column
-
-              .d-flex.mb-1
-                p.me-2 21
-                img( src="../../assets/img/icons/icon_like.svg" alt="Like Icon")
-
-              img.mb-2( src="../../assets/img/icons/icon_share.svg" alt="Share Icon")
-              img.me-1.mt-1( src="../../assets/img/icons/icon_bookmark.svg" alt="bookmark Icon")
-
-          .middleSection.d-flex.justify-content-between
-
-            .details
-              p Men’s Shirt
-              p #1204
-              p Puma
-
-            .colors
-
-              div.d-flex.pt-1
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932540" )
-
-                .outline.ms-2
-                  .productColor( style="background-color: #932588" )
-
-                .outline.ms-2( style="border: 1px solid #53373E" )
-                  .productColor( style="background-color: #53373E" )
-
-          .bottomSection.d-flex.justify-content-between
-
-            p.mb-0
-              span.offStyle.ms-1 15000$
-              br
-              span 10000$
-
-            button.btn
-              img( src="../../assets/img/icons/icon_plus.svg" alt="plus")
-
-
+      Slide.p-2( v-for="i in 8" :key="i" )
+        ProductsCart
 
       template(#addons)
-        Navigation
+        navigation
+
+  .row.mt-5.categoriesSection
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p Shirts
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p T-Shirts
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p College Shoes
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p Sport Shoes
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p High Heels
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p Pants
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p Socks
+
+    .col-3.p-2
+      .categoriesCart.d-flex.justify-content-center.align-items-center
+        p Shorts
+
+
 
 
 
@@ -435,13 +120,17 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { Carousel, Slide,Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import Payment from "@/views/dashboard/Payment.vue"
+import ProductsCart from "@/components/ProductsCart.vue"
 
 @Options({
   components: {
+    Payment,
     Carousel,
     Slide,
-    Navigation
+    Navigation,
+    ProductsCart
   },
 
   data()
@@ -459,6 +148,11 @@ import { Carousel, Slide,Navigation } from 'vue3-carousel'
         // Tablet
         770: {
           itemsToShow: 2,
+        },
+
+        //desktop
+        1120: {
+          itemsToShow: 3,
         },
       },
     }
