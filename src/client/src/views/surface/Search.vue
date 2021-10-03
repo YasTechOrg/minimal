@@ -9,6 +9,27 @@
 
     img( src="../../assets/img/icons/icon_search_gray.svg" alt="Search" )
 
+  .searchContainer.d-flex.align-items-start.justify-content-center
+
+    .left.flex-grow-0
+
+      .inner.w-100
+
+        .part1
+          .header
+
+            p.mb-0 Category
+
+            div
+
+          .content
+
+
+
+
+    .right.flex-grow-1
+
+
 </template>
 
 <script lang="ts">
