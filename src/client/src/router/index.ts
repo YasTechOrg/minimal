@@ -7,11 +7,12 @@ import Contact from "@/views/surface/Contact.vue"
 import Login from "@/views/account/Login.vue"
 import Register from "@/views/account/Register.vue"
 import Dashboard from "@/views/dashboard/Dashboard.vue"
-import Cart from "@/views/dashboard/Cart.vue";
-import Payment from "@/views/dashboard/Payment.vue";
-import Purchase from "@/views/dashboard/Purchase.vue";
-import Profile from "@/views/dashboard/Profile.vue";
-import Ticket from "@/views/dashboard/Ticket.vue";
+import Cart from "@/views/dashboard/Cart.vue"
+import Payment from "@/views/dashboard/Payment.vue"
+import Purchase from "@/views/dashboard/Purchase.vue"
+import Profile from "@/views/dashboard/Profile.vue"
+import Ticket from "@/views/dashboard/Ticket.vue"
+import CS50 from "@/views/surface/CS50.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,6 +37,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'About Us',
     component: About,
+    meta: { layout: "surface" },
+  },
+  {
+    path: '/cs50x',
+    name: 'CS50x Iran',
+    component: CS50,
     meta: { layout: "surface" },
   },
   {

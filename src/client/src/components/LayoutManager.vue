@@ -132,6 +132,29 @@
           p.mb-0 {{ $route.meta["nav"] }}
 
         slot
+  footer.w-100( v-if="pageLayout === 'surface' || pageLayout === 'dashboard'" data-main )
+
+    .logo_part.d-flex.justify-content-center.align-items-center
+
+      img( src="../assets/img/brand/logo.png" alt="Logo" )
+
+    .nav_part.row.m-auto
+
+      .col-4.p-0.d-flex.justify-content-center.align-items-center
+
+        router-link( to="/about" ) About Us
+
+      .col-4.p-0.d-flex.justify-content-center.align-items-center
+
+        router-link( to="/contact" ) Contact Us
+
+      .col-4.p-0.d-flex.justify-content-center.align-items-center
+
+        router-link( to="/cs50x" ) CS50XIRAN
+
+    .copy_part.d-flex.justify-content-center.align-items-center
+
+      p.mb-0 @ {{ new Date().getFullYear() }} All Rights Reserved | Hossein Araghi & Sahar Hallaji
 
 </template>
 
@@ -329,6 +352,7 @@ export default class LayoutManager extends Vue {}
 </script>
 
 <style src="../assets/sass/layout/header.sass" lang="sass"/>
+<style src="../assets/sass/layout/footer.sass" lang="sass"/>
 <style src="../assets/sass/layout/account.sass" lang="sass"/>
 <style src="../assets/sass/layout/surface.sass" lang="sass"/>
 <style src="../assets/sass/layout/dashboard.sass" lang="sass"/>
