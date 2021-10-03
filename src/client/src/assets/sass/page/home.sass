@@ -1,115 +1,44 @@
 @import src/assets/sass/public/fonts
 @import src/assets/sass/public/colors
 
-.productContainer
+@mixin productContainer
   background-color: white
   border-radius: 15px
   text-align: center
   max-width: 1440px
   margin: auto
 
-.sectionsTitle
-  font-family: ubuntu, serif
-  font-size: 40px
-  color: $accent_gray3
-
-.productCards
-  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
-  border-radius: 10px
-  padding: 14px 12px
-  max-width: 320px
-  min-width: 190px
-
-  .topSection
-    img
-      max-width: 200px
-      width: 75%
-      height: auto
-
-    .options
-      align-items: end
-
-      img
-        height: 24px
-        width: 24px
-
-      img:last-child
-        height: 18px
-        width: 14px
-
-      div
-        align-items: center
-
-        img:last-child
-          height: 18px
-          width: 20px
-
-        p
-          margin-bottom: 0
-          font-size: 18px
-          color: #858585
-
-  .middleSection
-    .details
-      text-align: left
-      width: 60%
-
-      p
-        text-overflow: ellipsis
-        overflow: hidden
-        width: auto
-        white-space: nowrap
-        font-size: 10px
-        margin-bottom: 0
-
-      p:first-child
-        font-size: 20px
-
-    .colors
-      max-width: 90px
-      width: 40%
-
-      div
-        .outline
-          height: 20px
-          width: 20px
-          border-radius: 50%
-          background-color: white
-          padding: 1px
-
-          .productColor
-            width: 16px
-            height: 16px
-            border-radius: 50%
-
-  .bottomSection
-    margin-top: 30px
-
-    p
-      font-family: ubuntu, serif
-      font-size: 20px
-      color: black
-
-    button
-      background-color: rgba(242, 145, 131, 0.78)
-      border-radius: 10px
-      height: 50px
-      width: 50px
-      margin-top: auto
-      box-shadow: none
-
-
-.offStyle
-  color: #9E9E9E
-  text-decoration: line-through
-
 #home
   background-color: whitesmoke
   padding: 85px 60px
 
+  .sectionsTitle
+    font-family: ubuntu, serif
+    font-size: 40px
+    margin-bottom: 0
+    color: $accent_gray3
+
+  .productsCardsRow
+    margin: 0
+    padding: 40px 45px
+
+  .carousel__next
+    background-image: url("../../img/icons/icon_black_arrow_next.svg")
+    background-repeat: no-repeat
+
+  .carousel__prev
+    background-image: url("../../img/icons/icon_black_arrow_prev.svg")
+    background-repeat: no-repeat
+
+  .carousel__next, .carousel__prev
+    width: 64px
+
+  .carousel__icon
+    display: none
+
 
   .inSalesProducts
-    @extend .productContainer
+    @include productContainer
 
     .input-group
       padding: 25px 25px
@@ -131,45 +60,153 @@
         font-family: roboto, serif
 
 
-    .productsCardsRow
-      margin: 0
-      padding: 0 45px
+  .topSales
+    @include productContainer
+
+    .topSales_special
+
+      > div
+        background: linear-gradient(#A43232, #28277D)
+        border-radius: 10px
+        padding: 25px 30px
+        max-width: 600px
+
+        div
+
+          img
+            max-width: 370px
+            max-height: 370px
+            min-width: 200px
+            min-height: 200px
+
+          p
+            font-family: ubuntu, serif
+            color: white
+            font-size: 3vw
+
+        button
+          background-color: white
+          border-radius: 10px
+          box-shadow: none
+          text-align: center
+          padding: 15px 0
+          width: 100%
+
+          p
+            font-size: 1.5vw
+            color: black
+            margin-bottom: 0
+
+  .newest
+    @include productContainer
+
+  > .categoriesSection
+
+    text-align: center
+    max-width: 1440px
+    margin: auto
+
+    .col-3
+
+      > .categoriesCart
+        background: linear-gradient(90deg, #FF7171, #FC7900)
+        max-width: 350px
+        max-height: 230px
+        min-width: 230px
+        min-height: 170px
+        border-radius: 15px
+
+        p
+          font-size: 3.5vw
+          font-family: bonheur_royale, serif
+          color: white
 
 
 @media screen and (max-width: 1120px)
-  .productCards
-    max-width: 480px
-    width: 80px
+  #home
+    .categoriesCart
+      display: none !important
 
-  .productsCardsRow
-    display: none
+    .carousel__next
 
-  .CardsSlider
-    display: block !important
+      background-image: url("../../img/icons/icon_gray_arrow_next.svg")
+      background-repeat: no-repeat
+
+    .carousel__prev
+
+      background-image: url("../../img/icons/icon_gray_arrow_prev.svg")
+      background-repeat: no-repeat
+
+    .productCards
+      max-width: 480px
+      width: 80%
+
+    .productsRowDisplay
+      display: none
+
+    .CardsSlider
+      display: block !important
+
+    .topSalesWidth
+      width: 100% !important
+
+    .topSales_special
+      margin-bottom: 40px
+
+      div
+        max-width: 400px
 
 
 @media screen and (max-width: 850px)
   #home
     padding: 55px 30px
 
-  .searchInput
-    width: 80% !important
+    .searchInput
+      width: 80% !important
+
+    .topSales_special
+      div
+
+        div
+
+          p
+            font-size: 4vw !important
+
+        button
+          p
+            font-size: 2.5vw !important
 
 
 @media screen and (max-width: 576px)
-  .sectionsTitle
-    font-size: 25px !important
 
   #home
     padding: 55px 0
 
-  .searchInput
-    width: 90% !important
-    padding: 18px 14px !important
-    top: -25px
+    .sectionsTitle
+      font-size: 25px !important
 
-    input
-      display: none
+    .searchInput
+      width: 90% !important
+      padding: 18px 14px !important
+      top: -25px
 
-    input.d-none
-      display: inline !important
+      input
+        display: none
+
+      input.d-none
+        display: inline !important
+
+    .topSales_special
+      div
+
+        div
+          img
+            max-width: 150px !important
+            max-height: 150px !important
+
+          p
+            font-size: 6vw !important
+
+        button
+          p
+            font-size: 4vw !important
