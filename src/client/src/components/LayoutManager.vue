@@ -154,7 +154,7 @@
 
     .copy_part.d-flex.justify-content-center.align-items-center
 
-      p.mb-0 @ {{ new Date().getFullYear() }} All Rights Reserved | Hossein Araghi & Sahar Hallaji
+      p.mb-0 @ {{ new Date().getFullYear() }} All Rights Reserved | Hossein Araghi & Fateme Hallaji
 
 </template>
 
