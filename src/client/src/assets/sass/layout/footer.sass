@@ -1,0 +1,56 @@
+@import ../public/colors
+@import ../public/fonts
+
+footer[data-main]
+  background-color: #fff
+  padding: 30px 16px
+
+  > .logo_part > img
+    height: 40px
+    margin-bottom: 5px
+
+  > .nav_part
+    padding: 25px
+    max-width: 900px
+
+    > div > a
+      font-family: ubuntu_light, serif
+      text-transform: uppercase
+      text-decoration: none
+      font-size: 30px
+
+  > .copy_part
+    border-top: 1px solid rgba(163, 163, 163, 0.66)
+    max-width: 900px
+    margin: auto
+    padding-top: 18px
+
+    > p
+      color: $accent_gray7
+      font-family: roboto, serif
+      text-align: center
+
+@media screen and (max-width: 660px)
+
+  footer[data-main]
+
+    > .nav_part
+
+      > div:first-child
+        border-right: 1px solid #9E9E9E
+
+      > div:last-child
+        border-left: 1px solid #9E9E9E
+
+      > div > a
+        font-size: 20px!important
+
+@media screen and (max-width: 460px)
+
+  footer[data-main]
+
+    > .nav_part
+      padding: 25px 0!important
+
+      > div > a
+        font-size: 15px!important

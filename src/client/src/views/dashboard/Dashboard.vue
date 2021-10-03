@@ -51,6 +51,9 @@
 import { Options, Vue } from 'vue-class-component'
 import MinimalProfile from "@/components/elements/MinimalProfile.vue"
 import ProductCartCard1 from "@/components/ProductCartCard1.vue"
+import axios from "axios";
+import {getToken} from "@/csrfManager";
+import {mapGetters} from "vuex";
 
 @Options({
 

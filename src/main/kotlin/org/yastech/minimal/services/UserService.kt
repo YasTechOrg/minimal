@@ -2,6 +2,7 @@ package org.yastech.minimal.services
 
 import org.springframework.stereotype.Service
 import org.yastech.minimal.data.PasswordEncoder
+import org.yastech.minimal.data.USERS
 import org.yastech.minimal.tables.User
 import org.yastech.minimal.tables.UserRepository
 
@@ -32,11 +33,33 @@ class UserService
 
         user.accepted = false
 
+        user.products = mutableListOf()
+
+        repository.save(user).subscribe()
+    }
+
+    fun addTestShop(user: User)
+    {
+        user.password = passwordEncoder.encoder().encode(user.password)
+
+        user.forgot = true
+
+        user.forgotCode = null
+
+        user.accepted = true
+
+        user.products = mutableListOf()
+
         repository.save(user).subscribe()
     }
 
     fun update(user: User)
     {
         repository.save(user).subscribe()
+    }
+
+    fun getShop(id: String): User
+    {
+        return repository.findByRoleAndEmail(USERS.SHOP, id).block()!!
     }
 }
