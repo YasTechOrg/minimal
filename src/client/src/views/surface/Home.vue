@@ -150,7 +150,8 @@ import ProductsCart from "@/components/ProductsCart.vue"
         },
       },
     }
-  }
+  },
+
 })
 
 export default class Home extends Vue {}
