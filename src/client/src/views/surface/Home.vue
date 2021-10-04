@@ -13,13 +13,13 @@
     p.sectionsTitle IN SALES PRODUCTS
 
     .row.m-0.pt-4.productsRowDisplay
-      .col-3.p-2( v-for="i in 8" :key="i" )
-        ProductsCart
+      .col-3.p-2( v-for="product in inSalesProduct" :key="product" )
+        ProductsCart( :product="product" )
 
     carousel.CardsSlider.pt-4.d-none( snap-align="center" :breakpoints="breakpoints" )
 
-      Slide.p-2( v-for="i in 8" :key="i" )
-        ProductsCart
+      Slide.p-2( v-for="product in inSalesProduct" :key="product" )
+        ProductsCart( :product="product" )
 
 
       template( #addons )
@@ -33,30 +33,30 @@
 
     .row.m-0.pt-4
 
-      .col-6.topSales_special.topSalesWidth.d-flex.justify-content-center
+      .col-6.topSales_special.topSalesWidth.d-flex.justify-content-center( v-if="specialProductExist" )
 
         .d-flex.flex-column.justify-content-between
 
           div
             img( src="../../assets/img/images/products_hoodi.png" )
 
-            p.fst-italic Boys Special Hoodies
-            p ADIDAS
-            p.fw-bold 20,000$
+            p.fst-italic {{ this.specialProduct.name }}
+            p {{ this.specialProduct.publisher }}
+            p.fw-bold {{ this.specialProduct.price.toLocaleString() }}$
 
           button.btn
             p Add to card
 
-      .col-6.topSalesWidth
+      .topSalesWidth(:class="{ 'col-12':!specialProductExist , 'col-12' :specialProductExist}")
 
         .row.ps-2.productsRowDisplay
           .col-6.p-2( v-for="i in 4" :key="i" )
-            ProductsCart
+            ProductsCart( :product="product" )
 
         carousel.CardsSlider.d-none( snap-align="center" :breakpoints="breakpoints" )
 
           Slide.p-2( v-for="i in 8" :key="i" )
-            ProductsCart
+            ProductsCart( :product="product" )
 
 
           template(#addons)
@@ -69,8 +69,8 @@
 
     carousel.mt-4.CardsSlider( snap-align="center" :breakpoints="breakpoints" )
 
-      Slide.p-2( v-for="i in 8" :key="i" )
-        ProductsCart
+      Slide.p-2( v-for="product in newestProduct" :key="product" )
+        ProductsCart( :product="product" )
 
       template(#addons)
         navigation
@@ -121,6 +121,9 @@ import { Options, Vue } from 'vue-class-component'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import Payment from "@/views/dashboard/Payment.vue"
 import ProductsCart from "@/components/ProductsCart.vue"
+import axios from "axios"
+import {getToken} from "@/csrfManager";
+
 
 @Options({
   components: {
@@ -149,9 +152,65 @@ import ProductsCart from "@/components/ProductsCart.vue"
           itemsToShow: 3,
         },
       },
+      inSalesProduct: {},
+      specialProductExist: 0,
+      specialProduct: {},
+      newestProduct:{}
     }
   },
+  async mounted()
+  {
+    this.InSalesProduct = await new Promise(resolve =>
+    {
+      axios
+          .get("/api/rest/product/get/off/8", {
+            headers : {
+              "_csrf" : getToken() as any
+            }
+          })
+          .then(value => resolve(value.data))
+          .catch(reason => console.log(reason))
+    }),
 
+    this.specialProductExist = await new Promise(resolve =>
+    {
+      axios
+          .get("/api/rest/product/get/specials/is", {
+            headers : {
+              "_csrf" : getToken() as any
+            }
+          })
+          .then(value => resolve(value.data))
+          .catch(reason => console.log(reason))
+    }),
+
+    this.specialProduct = await new Promise(resolve => {
+      axios
+          .get("/api/rest/product/get/specials/random", {
+            headers: {
+              "_csrf": getToken() as any
+            }
+          })
+          .then(value => resolve(value.data))
+          .catch(reason => console.log(reason))
+    }),
+
+    this.newestProduct = await new Promise(resolve => {
+      axios
+          .get("/api/rest/product/get/newest", {
+            headers: {
+              "_csrf": getToken() as any
+            }
+          })
+          .then(value => resolve(value.data))
+          .catch(reason => console.log(reason))
+    })
+
+
+
+
+
+  }
 })
 
 export default class Home extends Vue {}
