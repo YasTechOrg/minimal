@@ -225,7 +225,7 @@ import { mapGetters } from "vuex"
     async load()
     {
       // Check Login
-      if (this.$store.state.at !== "")
+       if (this.$store.state.at !== "")
       {
         const d: any = this.$store.state.at_time
         const date1: any = new Date(d)
