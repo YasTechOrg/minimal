@@ -49,7 +49,7 @@ class TestRestController
     fun api2(request: HttpServletRequest)
     {
         val id = "test-${Random.nextInt(100, 1000000)}"
-        val u = userService.get("testmail@gmail.com")
+        val u = userService.get("testmail2@gmail.com")
         u.products!!.add(id)
         userService.update(u)
         productService.add(Product(
@@ -60,7 +60,7 @@ class TestRestController
             true,
             140000,
             mutableListOf("id"),
-            "testmail@gmail.com",
+            "testmail2@gmail.com",
             LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             mapOf(),
             mutableListOf("#a832a6", "#32a834"),
