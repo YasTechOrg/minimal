@@ -1,0 +1,45 @@
+@import src/assets/sass/public/fonts
+
+#contact
+
+  > .pageContainer
+    padding: 60px 30px
+
+    .pageTitle
+      font-family: ubuntu, serif
+      font-size: 40px
+      letter-spacing: 5px
+
+    .d-flex
+      p, a
+        white-space: nowrap
+        font-size: 25px
+        font-family: ubuntu, serif
+        letter-spacing: 3px
+
+@media screen and (max-width: 768px)
+
+  #contact
+
+    > .pageContainer
+
+      .d-flex
+        p, a
+          font-size: 20px
+
+@media screen and (max-width: 576px)
+
+  #contact
+
+    > .pageContainer
+      padding: 30px 15px
+
+      .pageTitle
+        font-size: 30px
+
+      .d-flex
+        flex-flow: column
+        margin-bottom: 15px
+
+        p, a
+          font-size: 14px

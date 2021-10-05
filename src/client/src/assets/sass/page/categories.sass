@@ -30,3 +30,49 @@
         font-size: 18px
         font-family: roboto, serif
 
+    .categoriesContainer
+
+      .col-3
+
+        > .categoriesCart
+          background: linear-gradient(90deg, #FF7171, #FC7900)
+          max-width: 350px
+          max-height: 230px
+          min-width: 170px
+          min-height: 170px
+          width: 100%
+          border-radius: 15px
+
+          p
+            font-size: 4vw
+            font-family: bonheur_royale, serif
+            color: white
+
+
+@media screen and (max-width: 850px)
+
+  .categoriesContainer
+
+    .col-3
+      width: 50% !important
+
+      .categoriesCart
+
+        p
+          font-size: 7vw!important
+
+@media screen and (max-width: 576px)
+
+  .pageContainer
+    padding: 50px 20px!important
+
+    .categoriesContainer
+
+      .col-3
+        width: 100% !important
+
+        .categoriesCart
+          max-width: 550px!important
+
+          p
+            font-size: 14vw!important

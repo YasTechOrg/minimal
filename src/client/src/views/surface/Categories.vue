@@ -11,6 +11,42 @@
       input.form-control( placeholder="Search Categories"  type="text" )
       img.input-group-text( src="../../assets/img/icons/icon_search.svg" alt="Search Icon" )
 
+    .row.categoriesContainer.mt-4
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p Shirts
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p T-Shirts
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p College Shoes
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p Sport Shoes
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p High Heels
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p Pants
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p Socks
+
+      .col-3.p-2
+        .categoriesCart.d-flex.justify-content-center.align-items-center
+          p Shorts
+
+
+
 </template>
 
 <script lang="ts">

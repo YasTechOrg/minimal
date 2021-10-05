@@ -9,7 +9,7 @@
     .options.d-flex.flex-column
 
       .d-flex.mb-1
-        p.me-2 21
+        p.me-2 {{ product.like.length }}
         img( src="../assets/img/icons/icon_like.svg" alt="Like Icon")
 
       img.mb-2( src="../assets/img/icons/icon_share.svg" alt="Share Icon")
@@ -18,30 +18,24 @@
   .middleSection.d-flex.justify-content-between
 
     .details
-      p Men’s Shirt
-      p #1204
-      p Puma
+      p {{ product.categories }}
+      p {{ product.code }}
+      p {{ product.publisher }}
 
     .colors
 
       .d-flex.pt-1
 
-
-        .outline.ms-2
-          .productColor( style="background-color: #932540" )
-
-        .outline.ms-2
-          .productColor( style="background-color: #932588" )
-
-        .outline.ms-2( style="border: 1px solid #53373E" )
-          .productColor( style="background-color: #53373E" )
+        div( v-for="(color,index) in product.colors" :key="color" )
+          .outline.ms-2( :style="{'border': '1px solid' + color}" v-if="index===0" )
+          .productColor( :style="{'background-color':color}" )
 
   .bottomSection.d-flex.justify-content-between
 
     p.mb-0
-      span.offStyle.ms-1 15000$
+      span.offStyle.ms-1 {{ product.offValue.toLocaleString() }}$
       br
-      span 10000$
+      span {{ product.price.toLocaleString() }}$
 
     button.btn
       img( src="../assets/img/icons/icon_plus.svg" alt="plus")
@@ -51,7 +45,13 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 
-@Options({})
+@Options({
+  data(){
+    return{
+      props:["product"]
+    }
+  }
+})
 // ToDo : Bind Style
 export default class ProductsCard extends Vue {}
 </script>
