@@ -31,16 +31,18 @@ class SearchController
         val searchResult = productService.doSearch(
             SearchModel(
                 searchItems["text"].toString(),
-                searchItems["categories"] as MutableList<String>,
+                searchItems["category"].toString(),
                 searchItems["brands"] as MutableList<String>,
-                searchItems["min_price"] as Long,
-                searchItems["max_price"] as Long,
+                (searchItems["min_price"] as Double).toLong(),
+                (searchItems["max_price"] as Double).toLong(),
             )
         )
 
         // Convert Result To Json
         val jsonSearchResult = Gson()
             .toJson(searchResult)
+
+        Thread.sleep(1000)
 
         // Send Result To Client
         searchDispatcher.send(stompHeaderAccessor.sessionId!!, jsonSearchResult)

@@ -62,4 +62,9 @@ class UserService
     {
         return repository.findByRoleAndEmail(USERS.SHOP, id).block()!!
     }
+
+    fun getAllShops(): MutableList<User>
+    {
+        return repository.findAllByRole(USERS.SHOP).collectList().block()!!
+    }
 }

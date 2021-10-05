@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.yastech.minimal.data.USERS
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Document
@@ -26,4 +27,5 @@ data class User
 interface UserRepository : ReactiveMongoRepository<User, String>
 {
     fun findByRoleAndEmail(role: USERS, email: String): Mono<User>
+    fun findAllByRole(role: USERS): Flux<User>
 }

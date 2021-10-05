@@ -44,12 +44,23 @@ class ProductService
 
         filterQueries.and("price").gte(search.minPrice).lte(search.maxPrice)
 
-        search.categories!!.forEach {
-            filterQueries.and("categories").`in`(it)
-        }
+        if(search.brands!!.isNotEmpty())
+        {
+            val q = mutableListOf<Criteria>()
 
+            search.brands!!.forEach {
+                q.add(Criteria.where("publisher").`is`(it))
+            }
+
+            filterQueries.orOperator(q)
+        }
+        /*
         search.brands!!.forEach {
             filterQueries.and("publisher").`is`(it)
+        }*/
+        if(!search.categories.isNullOrEmpty())
+        {
+            filterQueries.and("categories").`in`(search.categories)
         }
 
         return templateRepository.find(

@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template lang="pug">
 
 .minimalProfile.cursor-pointer.position-relative

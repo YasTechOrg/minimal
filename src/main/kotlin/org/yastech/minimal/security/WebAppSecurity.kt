@@ -61,6 +61,8 @@ class WebAppSecurity
             // ACCESS TO AUTH APIS AND CONTROLLERS
             .antMatchers("/api/rest/account/user/get").authenticated()
             .antMatchers("/api/rest/product/**").authenticated()
+            .antMatchers("/api/rest/public/**").permitAll()
+            .antMatchers("/api/rest/test/**").permitAll()
 
             .antMatchers("/api/controller/account/**").permitAll()
 

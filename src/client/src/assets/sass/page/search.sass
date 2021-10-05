@@ -1,3 +1,5 @@
+@import ../public/colors
+
 #search
   padding: 16px
   max-width: 1440px!important
@@ -34,21 +36,88 @@
         padding: 20px
 
         > div
-          padding-bottom: 10px
+          padding-bottom: 20px
 
           > .header
+
             > p
               text-transform: uppercase
               color: black
               font-family: roboto, serif
               font-size: 20px
+              margin-bottom: 10px
+              letter-spacing: 3px
 
             > div
               height: 1px
               width: 100%
-              border: 1px dashed black
+              border: 1px dashed #9E9E9E
+
+        > .part1
+
+          > .content
+            padding-top: 10px
+
+            > .category
+              margin-top: 20px
+
+              > img
+                margin-right: 8px
+
+              > p
+                font-family: roboto, serif
+                font-size: 15px
+                line-height: 15px
+                text-transform: uppercase
+
+            > .category:hover > p, > .category.ac > p
+              color: $accent_blue!important
+
+        > .part2
+
+          > .content
+            padding-top: 20px
+
+            > .slider-target
+              margin: 0 5px
+
+            > .inputs
+              margin-top: 16px
+
+              > div > input
+                width: 100px
+                border: 1px solid $accent_gray4
+                padding: 5px
+                border-radius: 5px
+                color: #626262
+                font-family: roboto, serif
+
+        > .part3
+
+          > .content
+            padding-top: 20px
+
     > .right
       background-color: white
       border-radius: 10px
       padding: 20px
 
+      > p
+        text-transform: uppercase
+        color: black
+        font-family: roboto, serif
+        font-size: 20px
+        margin-bottom: 10px
+        letter-spacing: 3px
+
+      > div.line
+        height: 1px
+        width: 100%
+        border: 1px dashed #9E9E9E
+
+      > .results
+
+        > img
+          width: 200px
+          height: 200px
+          margin: 50px 0
