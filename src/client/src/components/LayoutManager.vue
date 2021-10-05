@@ -25,7 +25,6 @@
       router-link( active-class="ac" to="/dashboard/purchase" ) Purchase
       router-link( active-class="ac" to="/dashboard/ticket" ) Ticket
 
-
 .layoutManager
 
   header.d-flex.align-items-center.justify-content-center( v-if="pageLayout === 'surface' || pageLayout === 'dashboard'" data-main )
@@ -156,6 +155,36 @@
 
       p.mb-0 @ {{ new Date().getFullYear() }} All Rights Reserved | Hossein Araghi & Fatemeh Hallaji
 
+
+  .c.cart_w_search.d-flex( v-if="getCart.length !== 0" )
+
+    .search.d-flex.justify-content-center.align-items-center.cursor-pointer(
+      @click="$router.push('/search')"
+    )
+
+      img( src="../assets/img/icons/icon_search_white.svg" alt="search" )
+
+    .cart.d-flex.justify-content-between.align-items-center
+
+      .left.d-flex.justify-content-start.align-items-center
+
+        img( src="../assets/img/icons/icon_cart_white.svg" alt="cart" )
+
+        p.mb-0 {{ getCartSize }}
+
+      .right.d-flex.justify-content-end.align-items-center( @click="cOpen = !cOpen" )
+
+        img( src="../assets/img/icons/icon_arrow_top_white.svg" v-if="cOpen" alt="search" )
+        img( src="../assets/img/icons/icon_arrow_bottom_white.svg" v-else alt="search" )
+
+  .c.search( v-else )
+
+    .search.d-flex.justify-content-center.align-items-center.cursor-pointer.h-100(
+      @click="$router.push('/search')"
+    )
+
+      img( src="../assets/img/icons/icon_search_white.svg" alt="search" )
+
 </template>
 
 <script lang="ts">
@@ -177,8 +206,10 @@ import { mapGetters } from "vuex"
   {
     return {
       userInfo: {
-        email: ""
-      }
+        email: "",
+      },
+
+      cOpen: false
     }
   },
 
@@ -343,8 +374,15 @@ import { mapGetters } from "vuex"
     },
 
     ...mapGetters([
-        "getAuth"
-    ])
+        "getAuth",
+        "getCartSize"
+    ]),
+
+    // Get Cart
+    getCart()
+    {
+      return this.$store.state.cart
+    }
   }
 })
 
@@ -352,6 +390,7 @@ export default class LayoutManager extends Vue {}
 </script>
 
 <style src="../assets/sass/layout/header.sass" lang="sass"/>
+<style src="../assets/sass/layout/c.sass" lang="sass"/>
 <style src="../assets/sass/layout/footer.sass" lang="sass"/>
 <style src="../assets/sass/layout/account.sass" lang="sass"/>
 <style src="../assets/sass/layout/surface.sass" lang="sass"/>

@@ -63,14 +63,6 @@ import {mapGetters} from "vuex";
     ProductCartCard1
   },
 
-  // Page Variables
-  data()
-  {
-    return {
-
-    }
-  },
-
   // On Page Load
   async mounted()
   {

@@ -12,6 +12,7 @@ export default createStore({
   plugins: [createPersistedState()],
 
   mutations: {
+
     setAuth(state, token)
     {
       state.at = token
@@ -53,11 +54,28 @@ export default createStore({
 
     removeFromCart(state, id)
     {
-      const i = state.cart.findIndex((i: any) => i["p_id"] === id)
+      const i = state.cart.findIndex((b: any) => b["p_id"] === id)
 
       if (i > -1)
       {
-        state.cart[i].splice(i, 1)
+        if (state.cart[i]["p_num"] <= 1)
+        {
+          const newCart: any = []
+
+          state.cart.forEach((item: any) =>
+          {
+            if (item["p_id"] !== id)
+            {
+              newCart.push(item)
+            }
+          })
+
+          state.cart = newCart
+        }
+        else
+        {
+          state.cart[i]["p_num"]--
+        }
       }
     }
   },
@@ -66,7 +84,19 @@ export default createStore({
     getAuth: state =>
     {
       return `Bearer ${state.at}`
-    }
+    },
+
+    getCartSize: state =>
+    {
+      let size = 0
+
+      state.cart.forEach((item: any) =>
+      {
+        size += item["p_num"]
+      })
+
+      return size
+    },
   },
 
   actions: {

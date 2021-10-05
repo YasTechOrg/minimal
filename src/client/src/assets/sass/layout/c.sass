@@ -1,0 +1,43 @@
+.layoutManager
+
+  > .c
+    position: fixed
+    z-index: 99999
+    bottom: 10px
+    right: 10px
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
+    height: 54px
+    background-color: rgb(242, 145, 131)
+    border-radius: 5px
+
+  > .search
+    width: 54px
+
+
+  > .cart_w_search
+    width: 414px
+
+    > .cart
+      width: 360px
+      padding: 16px
+
+      > .left
+
+        p
+          font-size: 20px
+          font-family: ubuntu_light, serif
+          color: white
+          margin-left: 8px
+
+    > .search
+      width: 54px
+      border-right: 1px solid white
+
+@media screen and (max-width: 450px)
+
+  .layoutManager
+    > .cart_w_search, > .cart_w_search > .cart
+      width: 100%!important
+      right: 0!important
+      bottom: 0!important
+      border-radius: 0!important

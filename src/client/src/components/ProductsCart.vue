@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template lang="pug">
 
-.productCards.cursor-pointer( @click="$router.push(`/single?id=${ product['id'] }`)" )
+.productCards
 
   .topSection.d-flex.justify-content-between
 
@@ -19,7 +19,9 @@
   .middleSection.d-flex.justify-content-between
 
     .details
-      p {{ product.name }}
+      p.cursor-pointer(
+        @click="$router.push(`/single?id=${ product['id'] }`)"
+      ) {{ product.name }}
       p {{ '#' + product.code }}
       p {{ product.publisher }}
 
@@ -27,7 +29,7 @@
 
       .d-flex.pt-1.justify-content-start.align-items-center.flex-row-reverse
 
-        div.ms-2(
+        div.ms-1(
           v-for="( color, index ) in product.colors"
           :class="{ 'outline' : index === 0 }"
           :key="color"
@@ -43,7 +45,7 @@
       br
       span {{ product.price.toLocaleString() }}$
 
-    button.btn
+    button.btn( @click="addToCart" )
       img( src="../assets/img/icons/icon_plus.svg" alt="plus")
 
 </template>
@@ -53,7 +55,21 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
 
-  props: ["product"]
+  props: ["product"],
+
+  methods: {
+
+    addToCart()
+    {
+      this.$store.commit("addToCart", {
+        p_id : this.product["id"],
+        p_name: this.product["name"],
+        p_image: this.product["image"],
+        p_code: this.product["code"],
+        p_price: this.product["price"],
+      })
+    }
+  }
 })
 export default class ProductsCard extends Vue {}
 </script>
