@@ -3,6 +3,102 @@
 
 #search
 
+  .mob.d-none
+
+    .in
+
+      p Filter
+
+      span.material-icons.md-30( @click="toggleMob" ) close
+
+      .part1
+
+        .header
+
+          p.text-center Category
+
+          div
+
+        .content
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 'shirts' }"
+            @click="setCategory('shirts')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 Shirts
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 't-shirts' }"
+            @click="setCategory('t-shirts')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 T-Shirts
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 'shoes' }"
+            @click="setCategory('shoes')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 Shoes
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 'pants' }"
+            @click="setCategory('pants')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 Pants
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 'socks' }"
+            @click="setCategory('socks')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 Socks
+
+          .category.d-flex.justify-content-start.align-items-center.cursor-pointer(
+            :class="{ 'ac' : category === 'shorts' }"
+            @click="setCategory('shorts')"
+          )
+            img( src="../../assets/img/icons/icon_arrow_right_black.svg" alt="> " )
+            p.mb-0 Shorts
+
+
+
+
+      .part2
+        .header
+
+          p.text-center Price Range
+
+          div
+
+        .content
+
+          Slider( v-model="priceValue" :min="0" :max="999999999" :tooltips="false" )
+
+          .inputs.d-flex.align-items-center.justify-content-between
+
+            .left
+              input( v-model="priceValue[0]" type="text" )
+
+            .right
+              input( v-model="priceValue[1]" type="text" )
+
+
+
+      .part3
+        .header
+
+          p.text-center Brands
+
+          div
+
+        .content
+          Multiselect( v-model="brand" v-bind="brandsOptions" )
+
+
+
   .searchInput.d-flex.align-items-center.justify-content-between
 
     input( placeholder="Search everything you want...." type="text" v-model="search" )
@@ -100,11 +196,20 @@
 
 
     .right.flex-grow-1
-      p( v-if="searchResult === null" ) Sorry, No Result Found
-      p( v-else-if="searchResult.length === 0" ) Searching...
-      p( v-else ) {{ searchResult.length }} Results
 
-      div.line
+      .header.d-flex.align-items-center.justify-content-between
+        p( v-if="searchResult === null" ) Sorry, No Result Found
+        p( v-else-if="searchResult.length === 0" ) Searching...
+        p( v-else ) {{ searchResult.length }} Results
+
+        img.cursor-pointer.d-none(
+          src="../../assets/img/images/menu2.png"
+          @click="toggleMob"
+          alt="menu"
+        )
+
+      .in
+        .line
 
       .results.text-center
 
@@ -120,8 +225,15 @@
           alt="Searching..."
         )
 
-        .res.d-flex.align-items-start.justify-content-start( v-else )
-          | res
+        .res.d-flex.align-items-start.justify-content-start.flex-wrap( v-else )
+
+          .cd.w-25.d-flex.align-items-center.justify-content-center(
+            v-for="product in searchResult"
+            :key="product"
+            :product="product"
+          )
+
+            ProductsCart( :product="product" )
 
 
 
@@ -137,11 +249,13 @@ import { mapGetters } from "vuex"
 import SockJS from "sockjs-client"
 import Stomp from "webstomp-client"
 import { watch } from "vue"
+import ProductsCart from "@/components/ProductsCart.vue"
 
 @Options({
 
   // Page Components
   components: {
+    ProductsCart,
     Slider,
     Multiselect
   },
@@ -204,6 +318,11 @@ import { watch } from "vue"
     else
     {
       this.search = this.$route.query.q
+    }
+
+    if (this.$route.query.c != null && typeof this.$route.query.c !== "undefined")
+    {
+      this.category = this.$route.query.c
     }
 
     this.$nextTick(() =>
@@ -275,6 +394,14 @@ import { watch } from "vue"
       {
         this.category = category
       }
+    },
+
+    // Toggle Mobile Mode Filter
+    toggleMob()
+    {
+      document
+          .querySelector("#search > .mob")
+          ?.classList.toggle("d-none")
     }
   },
 

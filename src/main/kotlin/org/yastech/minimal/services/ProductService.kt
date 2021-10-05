@@ -27,6 +27,11 @@ class ProductService
         return productRepository.findAllByOffIsTrueOrderByBuyAsc().collectList().block()!!
     }
 
+    fun allTopSales(): MutableList<Product>
+    {
+        return productRepository.findAllByOrderByBuyAsc().collectList().block()!!
+    }
+
     fun get(id: String): Product
     {
         return productRepository.findById(id).block()!!

@@ -40,6 +40,7 @@ class ProductRestController
         return products.map {
             ProductDetail(
                 it.id,
+                it.name,
                 it.images[0],
                 it.code,
                 it.off,
@@ -56,15 +57,42 @@ class ProductRestController
     @GetMapping("/get/specials/is")
     fun getIsSpecialSales(request: HttpServletRequest): Mono<Boolean>
     {
-       return specialSalesService.all().isEmpty().toMono()
+       return specialSalesService.all().isNotEmpty().toMono()
     }
 
     @GetMapping("/get/specials/random")
-    fun getSpecialSales(request: HttpServletRequest): Mono<SpecialSales>
+    fun getSpecialSale(request: HttpServletRequest): Mono<SpecialSales>
     {
         val specialSales = specialSalesService.all()
 
-        return specialSales[Random.nextInt(0, specialSales.size -1)].toMono()
+        return specialSales[Random.nextInt(0, specialSales.size)].toMono()
+    }
+
+    @GetMapping("/get/specials/{count}")
+    fun getSpecialSales(request: HttpServletRequest, @PathVariable count: Int): Flux<ProductDetail>
+    {
+        var products = productService.allTopSales()
+
+        if (products.size >= count)
+        {
+            products = products.subList(0, count)
+        }
+
+        return products.map {
+            ProductDetail(
+                it.id,
+                it.name,
+                it.images[0],
+                it.code,
+                it.off,
+                it.offValue,
+                it.price,
+                userService.getShop(it.publisher!!).name,
+                it.colors,
+                it.like,
+                it.categories
+            )
+        }.toFlux()
     }
 
     @GetMapping("/get/newest")
@@ -77,6 +105,7 @@ class ProductRestController
         return products.subList(0, 6).map {
             ProductDetail(
                 it.id,
+                it.name,
                 it.images[0],
                 it.code,
                 it.off,

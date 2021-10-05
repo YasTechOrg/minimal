@@ -2,11 +2,11 @@
 
 #about
 
-  .pageContainer
+  .pageContainer.text-center
 
     p.mb-5.pageTitle ABOUT US
 
-    p.w-75 MINIMAL is an online store that focuses on selling clothes and was developed by Hossein Araghi and Fatemeh Hallaji. The main reason for this project is the final project of the Harvard Computer Science course.
+    p MINIMAL is an online store that focuses on selling clothes and was developed by Hossein Araghi and Fatemeh Hallaji. The main reason for this project is the final project of the Harvard Computer Science course.
 
 </template>
 

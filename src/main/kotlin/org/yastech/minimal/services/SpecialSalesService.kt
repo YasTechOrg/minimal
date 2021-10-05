@@ -16,4 +16,9 @@ class SpecialSalesService
     {
         return specialSalesRepository.findAll().collectList().block()!!
     }
+
+    fun add(specialSales: SpecialSales)
+    {
+        specialSalesRepository.save(specialSales).subscribe()
+    }
 }

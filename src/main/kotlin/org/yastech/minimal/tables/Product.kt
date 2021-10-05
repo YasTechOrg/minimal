@@ -28,4 +28,5 @@ data class Product
 interface ProductRepository : ReactiveMongoRepository<Product, String>
 {
     fun findAllByOffIsTrueOrderByBuyAsc(): Flux<Product>
+    fun findAllByOrderByBuyAsc(): Flux<Product>
 }

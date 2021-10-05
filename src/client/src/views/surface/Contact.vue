@@ -16,7 +16,7 @@
 
     .d-flex
       p.me-3 ticket :
-      router-link( active-class="ac" to="/dashboard" ) go to dashboard
+      router-link( active-class="ac" to="/dashboard/ticket" ) go to dashboard
 
 
 </template>

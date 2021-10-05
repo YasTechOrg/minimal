@@ -1,12 +1,15 @@
 package org.yastech.minimal.api
 
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.yastech.minimal.data.USERS
 import org.yastech.minimal.services.ProductService
+import org.yastech.minimal.services.SpecialSalesService
 import org.yastech.minimal.services.UserService
 import org.yastech.minimal.tables.Product
+import org.yastech.minimal.tables.SpecialSales
 import org.yastech.minimal.tables.User
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -18,7 +21,8 @@ import kotlin.random.Random
 class TestRestController
 (
     private var userService: UserService,
-    private var productService: ProductService
+    private var productService: ProductService,
+    private var specialProductService: SpecialSalesService,
 )
 {
     @GetMapping("/add/shop")
@@ -64,5 +68,19 @@ class TestRestController
             mutableListOf("shirts"),
             0
         ))
+    }
+
+    @GetMapping("/add/sp/{t}")
+    fun api3(request: HttpServletRequest, @PathVariable t: String)
+    {
+        val id = "special-${Random.nextInt(100, 1000000)}"
+        specialProductService.add(SpecialSales(
+            id,
+            t,
+            productService.get(t).name!!,
+            userService.getShop(productService.get(t).publisher!!).name!!,
+            productService.get(t).price!!,
+        ))
+
     }
 }

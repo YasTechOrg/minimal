@@ -31,33 +31,33 @@
 
   .topSales.mt-5.pt-4.pb-4.ps-5.pe-5
 
-    p.sectionsTitle.pt-4 TOP SALAES
+    p.sectionsTitle.pt-4 TOP SALES
 
     .row.m-0.pt-4
 
       .col-6.topSales_special.topSalesWidth.d-flex.justify-content-center( v-if="specialProductExist" )
 
-        .d-flex.flex-column.justify-content-between
+        .d-flex.flex-column.justify-content-between.mt-2.mb-2.w-100
 
           div
             img( src="../../assets/img/images/products_hoodi.png" )
 
-            p.fst-italic {{ this.specialProduct.name }}
-            p {{ this.specialProduct.publisher }}
-            p.fw-bold {{ this.specialProduct.price.toLocaleString() }}$
+            p.fst-italic {{ specialProduct.name }}
+            p {{ specialProduct.publisher }}
+            p.fw-bold {{ specialProduct.price.toLocaleString() }}$
 
           button.btn
             p Add to card
 
-      .topSalesWidth(:class="{ 'col-12':!specialProductExist , 'col-12' :specialProductExist}")
+      .topSalesWidth( :class="{ 'col-12': !specialProductExist , 'col-6' : specialProductExist }" )
 
         .row.ps-2.productsRowDisplay
-          .col-6.p-2( v-for="i in 4" :key="i" )
+          .col-6.p-2( v-for="product in topSales" :key="product" )
             ProductsCart( :product="product" )
 
         carousel.CardsSlider.d-none( snap-align="center" :breakpoints="breakpoints" )
 
-          Slide.p-2( v-for="i in 8" :key="i" )
+          Slide.p-2( v-for="product in topSales" :key="product" )
             ProductsCart( :product="product" )
 
 
@@ -111,11 +111,6 @@
       .categoriesCart.d-flex.justify-content-center.align-items-center
         p Shorts
 
-
-
-
-
-
 </template>
 
 <script lang="ts">
@@ -158,21 +153,27 @@ import { getToken } from "@/csrfManager"
           itemsToShow: 3,
         },
       },
-      inSalesProduct: {},
-      specialProductExist: 0,
-      specialProduct: {},
-      newestProduct:{}
+      inSalesProduct: [],
+      specialProductExist: false,
+      specialProduct: {
+        name: "",
+        price: 0
+      },
+      topSales: [],
+      newestProduct: []
     }
   },
 
   async mounted()
   {
+
     this.$nextTick(() =>
     {
       window.addEventListener('resize', this.onResize)
     })
 
-    this.InSalesProduct = await new Promise(resolve =>
+
+    this.inSalesProduct = await new Promise(resolve =>
     {
       axios
           .get("/api/rest/product/get/off/8", {
@@ -182,30 +183,60 @@ import { getToken } from "@/csrfManager"
           })
           .then(value => resolve(value.data))
           .catch(reason => console.log(reason))
-    }),
+    })
 
-        this.specialProductExist = await new Promise(resolve =>
-        {
-          axios
-              .get("/api/rest/product/get/specials/is", {
-                headers : {
-                  "_csrf" : getToken() as any
-                }
-              })
-              .then(value => resolve(value.data))
-              .catch(reason => console.log(reason))
-        }),
+    this.specialProductExist = await new Promise(resolve =>
+    {
+      axios
+          .get("/api/rest/product/get/specials/is", {
+            headers : {
+              "_csrf" : getToken() as any
+            }
+          })
+          .then(async value =>
+          {
+            resolve(value.data)
 
-        this.specialProduct = await new Promise(resolve => {
-          axios
-              .get("/api/rest/product/get/specials/random", {
-                headers: {
-                  "_csrf": getToken() as any
-                }
+            if (value.data)
+            {
+              this.specialProduct = await new Promise(resolve2 => {
+                axios
+                    .get("/api/rest/product/get/specials/random", {
+                      headers: {
+                        "_csrf": getToken() as any
+                      }
+                    })
+                    .then(value2 => resolve2(value2.data))
+                    .catch(reason2 => console.log(reason2))
               })
-              .then(value => resolve(value.data))
-              .catch(reason => console.log(reason))
-        }),
+
+              this.topSales = await new Promise(resolve2 => {
+                axios
+                    .get("/api/rest/product/get/specials/4", {
+                      headers: {
+                        "_csrf": getToken() as any
+                      }
+                    })
+                    .then(value2 => resolve2(value2.data))
+                    .catch(reason2 => console.log(reason2))
+              })
+            }
+            else
+            {
+              this.topSales = await new Promise(resolve2 => {
+                axios
+                    .get("/api/rest/product/get/specials/8", {
+                      headers: {
+                        "_csrf": getToken() as any
+                      }
+                    })
+                    .then(value2 => resolve2(value2.data))
+                    .catch(reason2 => console.log(reason2))
+              })
+            }
+          })
+          .catch(reason => console.log(reason))
+    })
 
         this.newestProduct = await new Promise(resolve => {
           axios

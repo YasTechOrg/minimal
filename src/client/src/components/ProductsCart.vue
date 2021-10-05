@@ -1,7 +1,8 @@
 <!--suppress ALL -->
 <template lang="pug">
 
-.productCards
+.productCards.cursor-pointer( @click="$router.push(`/single?id=${ product['id'] }`)" )
+
   .topSection.d-flex.justify-content-between
 
     img( src="../assets/img/images/products_shirt.png" alt="Product")
@@ -18,22 +19,27 @@
   .middleSection.d-flex.justify-content-between
 
     .details
-      p {{ product.categories }}
-      p {{ product.code }}
+      p {{ product.name }}
+      p {{ '#' + product.code }}
       p {{ product.publisher }}
 
     .colors
 
-      .d-flex.pt-1
+      .d-flex.pt-1.justify-content-start.align-items-center.flex-row-reverse
 
-        div( v-for="(color,index) in product.colors" :key="color" )
-          .outline.ms-2( :style="{'border': '1px solid' + color}" v-if="index===0" )
-          .productColor( :style="{'background-color':color}" )
+        div.ms-2(
+          v-for="( color, index ) in product.colors"
+          :class="{ 'outline' : index === 0 }"
+          :key="color"
+        )
+          .productColor(
+            :style="{ 'background-color': color }"
+          )
 
   .bottomSection.d-flex.justify-content-between
 
-    p.mb-0
-      span.offStyle.ms-1 {{ product.offValue.toLocaleString() }}$
+    p.mb-0.text-start
+      span.offStyle {{ product.offValue.toLocaleString() }}$
       br
       span {{ product.price.toLocaleString() }}$
 
@@ -46,13 +52,9 @@
 import { Options, Vue } from 'vue-class-component'
 
 @Options({
-  data(){
-    return{
-      props:["product"]
-    }
-  }
+
+  props: ["product"]
 })
-// ToDo : Bind Style
 export default class ProductsCard extends Vue {}
 </script>
 

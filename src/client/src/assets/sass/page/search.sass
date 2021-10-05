@@ -6,6 +6,101 @@
   width: 100%!important
   margin: auto
 
+  > .mob
+    position: fixed
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.25)
+    z-index: 99999
+    background-color: rgba(0, 0, 0, 0.25)
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+    > .in
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 90%
+      padding: 10px 20px
+      background-color: white
+      position: absolute
+      border-radius: 10px
+
+      > p
+        margin: 10px
+        text-align: left
+        font-family: roboto, serif
+        text-transform: uppercase
+        letter-spacing: 3px
+        font-size: 20px
+
+      > span
+        position: absolute
+        top: 20px
+        right: 13px
+
+      > div
+        padding-bottom: 20px
+
+        > .header
+
+          > p
+            text-transform: uppercase
+            color: black
+            font-family: roboto, serif
+            font-size: 20px
+            margin-bottom: 10px
+            letter-spacing: 3px
+
+          > div
+            height: 1px
+            width: 100%
+            border: 1px dashed #9E9E9E
+
+      > .part1
+
+        > .content
+          padding-top: 10px
+
+          > .category
+            margin-top: 20px
+
+            > img
+              margin-right: 8px
+
+            > p
+              font-family: roboto, serif
+              font-size: 15px
+              line-height: 15px
+              text-transform: uppercase
+
+          > .category:hover > p, > .category.ac > p
+            color: $accent_blue!important
+
+      > .part2
+
+        > .content
+          padding-top: 20px
+
+          > .slider-target
+            margin: 0 5px
+
+          > .inputs
+            margin-top: 16px
+
+            > div > input
+              width: 100px
+              border: 1px solid $accent_gray4
+              padding: 5px
+              border-radius: 5px
+              color: #626262
+              font-family: roboto, serif
+
+      > .part3
+
+        > .content
+          padding-top: 20px
+
   > .searchInput
     background-color: white
     padding: 20px
@@ -102,18 +197,28 @@
       border-radius: 10px
       padding: 20px
 
-      > p
-        text-transform: uppercase
-        color: black
-        font-family: roboto, serif
-        font-size: 20px
-        margin-bottom: 10px
-        letter-spacing: 3px
+      > .header
 
-      > div.line
-        height: 1px
-        width: 100%
-        border: 1px dashed #9E9E9E
+        > p
+          text-transform: uppercase
+          color: black
+          font-family: roboto, serif
+          font-size: 20px
+          margin-bottom: 10px
+          letter-spacing: 3px
+          padding: 0 8px
+
+        > img
+          padding-right: 8px
+          margin-bottom: 10px
+
+      > .in
+        padding: 0 8px
+
+        > div.line
+          height: 1px
+          width: 100%
+          border: 1px dashed #9E9E9E
 
       > .results
 
@@ -121,3 +226,34 @@
           width: 200px
           height: 200px
           margin: 50px 0
+
+        > .res
+
+          > .cd
+            padding-top: 16px
+            padding-right: 8px
+            padding-left: 8px
+
+@media screen and (max-width: 1200px)
+
+  #search > .searchContainer > .right > .results > .res > .cd
+    width: 33.3333333333%!important
+
+@media screen and (max-width: 1000px)
+
+  #search > .searchContainer > .left
+    display: none!important
+
+  #search > .searchContainer > .right > .header > img
+    display: block!important
+
+@media screen and (max-width: 780px)
+
+  #search > .searchContainer > .right > .results > .res > .cd
+    width: 50%!important
+
+@media screen and (max-width: 500px)
+
+  #search > .searchContainer > .right > .results > .res > .cd,
+  #search > .searchContainer > .right > .results > .res > .cd > div
+    width: 100%!important

@@ -5,15 +5,18 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor
 import org.springframework.stereotype.Controller
 import org.yastech.minimal.dispatcher.SearchDispatcher
+import org.yastech.minimal.models.ProductDetail
 import org.yastech.minimal.models.SearchModel
 import org.yastech.minimal.services.ProductService
+import org.yastech.minimal.services.UserService
 
 
 @Controller
 class SearchController
 (
     private val searchDispatcher: SearchDispatcher,
-    private val productService: ProductService
+    private val productService: ProductService,
+    private val userService: UserService
 )
 {
     @Suppress("UNCHECKED_CAST")
@@ -38,9 +41,25 @@ class SearchController
             )
         )
 
+        val finalResult = searchResult.map {
+            ProductDetail(
+                it.id,
+                it.name,
+                it.images[0],
+                it.code,
+                it.off,
+                it.offValue,
+                it.price,
+                userService.getShop(it.publisher!!).name,
+                it.colors,
+                it.like,
+                it.categories
+            )
+        }
+
         // Convert Result To Json
         val jsonSearchResult = Gson()
-            .toJson(searchResult)
+            .toJson(finalResult)
 
         Thread.sleep(1000)
 
